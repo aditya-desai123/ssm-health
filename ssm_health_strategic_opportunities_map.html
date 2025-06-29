@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a6f7f181176f10d12dff5cfdb21ba5d4 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    bottom: 50px; left: 50px; width: 250px; height: 200px; 
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:14px; padding: 10px">
+        <h4>Strategic Opportunities</h4>
+        <p><i class="fa fa-star fa-2x" style="color:green"></i> High-Income Underserved</p>
+        <p><i class="fa fa-heart fa-2x" style="color:purple"></i> Senior Opportunities</p>
+        <p><i class="fa fa-child fa-2x" style="color:orange"></i> Youth Opportunities</p>
+        <p><i class="fa fa-warning fa-2x" style="color:red"></i> Overserved Markets</p>
+        </div>
+        
+    
+            <div class="folium-map" id="map_a6f7f181176f10d12dff5cfdb21ba5d4" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a6f7f181176f10d12dff5cfdb21ba5d4 = L.map(
+                "map_a6f7f181176f10d12dff5cfdb21ba5d4",
+                {
+                    center: [39.8283, -98.5795],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2d2b13cbda9a7427970709ee5f333676 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2d2b13cbda9a7427970709ee5f333676.addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var marker_a508f2d99e1f5e2367cf34e3a178d302 = L.marker(
+                [43.4795925, -88.8115109],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_b1a5258d2c87a1e08acfbab2393af8a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4a9256fe1e6c15d93003433717199227 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_098ba20d84d708079696343bd02e166b = $(`<div id="html_098ba20d84d708079696343bd02e166b" style="width: 100.0%; height: 100.0%;"><b>High-Income Underserved</b><br>MSA: Beaver Dam, WI Micropolitan Statistical Area<br>Income: $81,245<br>Facilities per 100k: 4.5</div>`)[0];
+                popup_4a9256fe1e6c15d93003433717199227.setContent(html_098ba20d84d708079696343bd02e166b);
+            
+        
+
+        marker_a508f2d99e1f5e2367cf34e3a178d302.bindPopup(popup_4a9256fe1e6c15d93003433717199227)
+        ;
+
+        
+    
+    
+            marker_a508f2d99e1f5e2367cf34e3a178d302.bindTooltip(
+                `<div>
+                     High-Income Underserved
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a508f2d99e1f5e2367cf34e3a178d302.setIcon(icon_b1a5258d2c87a1e08acfbab2393af8a7);
+            
+    
+            var marker_7548b34dc0d6ee608c6205101da077bf = L.marker(
+                [42.285914, -89.670228],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_1461e7675514a5b304641cee1e5f7543 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3a8f8d27ea94796122ed5e2edf76862 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6c21b4dcf14fdefa80542c7029a0eb73 = $(`<div id="html_6c21b4dcf14fdefa80542c7029a0eb73" style="width: 100.0%; height: 100.0%;"><b>High-Income Underserved</b><br>MSA: Freeport, IL Micropolitan Statistical Area<br>Income: $81,221<br>Facilities per 100k: 3.3</div>`)[0];
+                popup_e3a8f8d27ea94796122ed5e2edf76862.setContent(html_6c21b4dcf14fdefa80542c7029a0eb73);
+            
+        
+
+        marker_7548b34dc0d6ee608c6205101da077bf.bindPopup(popup_e3a8f8d27ea94796122ed5e2edf76862)
+        ;
+
+        
+    
+    
+            marker_7548b34dc0d6ee608c6205101da077bf.bindTooltip(
+                `<div>
+                     High-Income Underserved
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7548b34dc0d6ee608c6205101da077bf.setIcon(icon_1461e7675514a5b304641cee1e5f7543);
+            
+    
+            var marker_337c639aa36ac44721d73f0ec6cd70c5 = L.marker(
+                [42.9200658, -89.2111051],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_d5e69e3a9a8268fceeb473d4cf9f44f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ca303386813169f65ec5f00333fffb11 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_202b6aaaf022cb16d346625933c4e8d7 = $(`<div id="html_202b6aaaf022cb16d346625933c4e8d7" style="width: 100.0%; height: 100.0%;"><b>High-Income Underserved</b><br>MSA: Madison, WI Metropolitan Statistical Area<br>Income: $84,000<br>Facilities per 100k: 4.7</div>`)[0];
+                popup_ca303386813169f65ec5f00333fffb11.setContent(html_202b6aaaf022cb16d346625933c4e8d7);
+            
+        
+
+        marker_337c639aa36ac44721d73f0ec6cd70c5.bindPopup(popup_ca303386813169f65ec5f00333fffb11)
+        ;
+
+        
+    
+    
+            marker_337c639aa36ac44721d73f0ec6cd70c5.bindTooltip(
+                `<div>
+                     High-Income Underserved
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_337c639aa36ac44721d73f0ec6cd70c5.setIcon(icon_d5e69e3a9a8268fceeb473d4cf9f44f9);
+            
+    
+            var marker_f6a4e4eb29eba4f14ff15c324ab7c5b9 = L.marker(
+                [38.3135798, -88.9420568],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_c36f76559c3af982ca881839357ab125 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_accb7283838f6b75dde63a16c79d99f2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cc6672f245f078a1615fec1c202877db = $(`<div id="html_cc6672f245f078a1615fec1c202877db" style="width: 100.0%; height: 100.0%;"><b>High-Income Underserved</b><br>MSA: Mount Vernon, IL Micropolitan Statistical Area<br>Income: $81,379<br>Facilities per 100k: 4.2</div>`)[0];
+                popup_accb7283838f6b75dde63a16c79d99f2.setContent(html_cc6672f245f078a1615fec1c202877db);
+            
+        
+
+        marker_f6a4e4eb29eba4f14ff15c324ab7c5b9.bindPopup(popup_accb7283838f6b75dde63a16c79d99f2)
+        ;
+
+        
+    
+    
+            marker_f6a4e4eb29eba4f14ff15c324ab7c5b9.bindTooltip(
+                `<div>
+                     High-Income Underserved
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6a4e4eb29eba4f14ff15c324ab7c5b9.setIcon(icon_c36f76559c3af982ca881839357ab125);
+            
+    
+            var marker_f240cc4a24b085859f2bffd48afd038d = L.marker(
+                [35.70801204722745, -96.87583268195566],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_f1df33dc770618b41de4a11f57e1a0ac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8efb6562445e344ac6eb8219f045e59f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1d3ce5f825f5f3dd37b23856f2ff90d8 = $(`<div id="html_1d3ce5f825f5f3dd37b23856f2ff90d8" style="width: 100.0%; height: 100.0%;"><b>High-Income Underserved</b><br>MSA: Oklahoma City, OK Metropolitan Statistical Area<br>Income: $91,131<br>Facilities per 100k: 12.9</div>`)[0];
+                popup_8efb6562445e344ac6eb8219f045e59f.setContent(html_1d3ce5f825f5f3dd37b23856f2ff90d8);
+            
+        
+
+        marker_f240cc4a24b085859f2bffd48afd038d.bindPopup(popup_8efb6562445e344ac6eb8219f045e59f)
+        ;
+
+        
+    
+    
+            marker_f240cc4a24b085859f2bffd48afd038d.bindTooltip(
+                `<div>
+                     High-Income Underserved
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f240cc4a24b085859f2bffd48afd038d.setIcon(icon_f1df33dc770618b41de4a11f57e1a0ac);
+            
+    
+            var marker_aa0b30225c91ef6da0c9e332ec953459 = L.marker(
+                [42.3786164, -89.8230211],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_bac80ced9bfa171f7f13bb999691d28e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc55197a4285610d24c56748041b5d51 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8549e5f4d3daf4f7c118eaff1d6b682e = $(`<div id="html_8549e5f4d3daf4f7c118eaff1d6b682e" style="width: 100.0%; height: 100.0%;"><b>Overserved Markets (Risk)</b><br>MSA: 99999<br>Facilities per 100k: 1197.4</div>`)[0];
+                popup_dc55197a4285610d24c56748041b5d51.setContent(html_8549e5f4d3daf4f7c118eaff1d6b682e);
+            
+        
+
+        marker_aa0b30225c91ef6da0c9e332ec953459.bindPopup(popup_dc55197a4285610d24c56748041b5d51)
+        ;
+
+        
+    
+    
+            marker_aa0b30225c91ef6da0c9e332ec953459.bindTooltip(
+                `<div>
+                     Overserved Markets (Risk)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aa0b30225c91ef6da0c9e332ec953459.setIcon(icon_bac80ced9bfa171f7f13bb999691d28e);
+            
+    
+            var marker_820ccee57e7673be530c9801d96741fa = L.marker(
+                [43.6163263, -88.4901369],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_93d3cabd9348e0854463a4dad3eb7d59 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2ce0de359ebb03159786871736382a0e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_777a6971b1b556f58c1a4c2616132b74 = $(`<div id="html_777a6971b1b556f58c1a4c2616132b74" style="width: 100.0%; height: 100.0%;"><b>Overserved Markets (Risk)</b><br>MSA: Fond du Lac, WI Metropolitan Statistical Area<br>Facilities per 100k: 248.1</div>`)[0];
+                popup_2ce0de359ebb03159786871736382a0e.setContent(html_777a6971b1b556f58c1a4c2616132b74);
+            
+        
+
+        marker_820ccee57e7673be530c9801d96741fa.bindPopup(popup_2ce0de359ebb03159786871736382a0e)
+        ;
+
+        
+    
+    
+            marker_820ccee57e7673be530c9801d96741fa.bindTooltip(
+                `<div>
+                     Overserved Markets (Risk)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_820ccee57e7673be530c9801d96741fa.setIcon(icon_93d3cabd9348e0854463a4dad3eb7d59);
+            
+    
+            var marker_578dc0747bb3d69d84ea3d6ae4f11694 = L.marker(
+                [43.6011315, -88.2770335],
+                {
+}
+            ).addTo(map_a6f7f181176f10d12dff5cfdb21ba5d4);
+        
+    
+            var icon_195441e875326b66cbfe45e3cd5a2f3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e267df14aed04ab95396005047685934 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6bc8097689a7a42e9c080638884f7783 = $(`<div id="html_6bc8097689a7a42e9c080638884f7783" style="width: 100.0%; height: 100.0%;"><b>Overserved Markets (Risk)</b><br>MSA: Milwaukee-Waukesha-West Allis, WI Metropolitan Statistical Area<br>Facilities per 100k: 320.9</div>`)[0];
+                popup_e267df14aed04ab95396005047685934.setContent(html_6bc8097689a7a42e9c080638884f7783);
+            
+        
+
+        marker_578dc0747bb3d69d84ea3d6ae4f11694.bindPopup(popup_e267df14aed04ab95396005047685934)
+        ;
+
+        
+    
+    
+            marker_578dc0747bb3d69d84ea3d6ae4f11694.bindTooltip(
+                `<div>
+                     Overserved Markets (Risk)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_578dc0747bb3d69d84ea3d6ae4f11694.setIcon(icon_195441e875326b66cbfe45e3cd5a2f3a);
+            
+</script>
+</html>

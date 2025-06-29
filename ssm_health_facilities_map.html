@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0077481a57f1dbf68bb6defede9ce489 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    bottom: 50px; left: 50px; width: 200px; height: 300px; 
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:14px; padding: 10px">
+        <p><b>Facility Types</b></p>
+        <p><i class="fa fa-circle" style="color:red"></i> Hospital</p><p><i class="fa fa-circle" style="color:orange"></i> Urgent Care</p><p><i class="fa fa-circle" style="color:yellow"></i> Express/Retail Clinic</p><p><i class="fa fa-circle" style="color:blue"></i> Pharmacy</p><p><i class="fa fa-circle" style="color:purple"></i> Imaging Services</p><p><i class="fa fa-circle" style="color:green"></i> Laboratory</p><p><i class="fa fa-circle" style="color:pink"></i> Therapy Services</p><p><i class="fa fa-circle" style="color:darkred"></i> Cancer Care</p><p><i class="fa fa-circle" style="color:darkblue"></i> Cardiology</p><p><i class="fa fa-circle" style="color:darkgreen"></i> Orthopedics</p><p><i class="fa fa-circle" style="color:lightblue"></i> Pediatrics</p><p><i class="fa fa-circle" style="color:lightcoral"></i> OB/GYN</p><p><i class="fa fa-circle" style="color:lightgreen"></i> Primary Care</p><p><i class="fa fa-circle" style="color:gray"></i> Specialty Care</p></div>
+    
+            <div class="folium-map" id="map_0077481a57f1dbf68bb6defede9ce489" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0077481a57f1dbf68bb6defede9ce489 = L.map(
+                "map_0077481a57f1dbf68bb6defede9ce489",
+                {
+                    center: [39.51595533666668, -91.07784142166669],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_1b558ecbefcee75504e58c2e29fe8d63 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1b558ecbefcee75504e58c2e29fe8d63.addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var marker_0c512fa0e5487fe480382ce8de3f6d7c = L.marker(
+                [43.0540242, -89.3988802],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_d6a3bfc217197d903c61a9baca7ee429 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_13334cfe52b372f4a6e55a712a0a96d9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_03cdd825c683a225dd9e942913bbc200 = $(`<div id="html_03cdd825c683a225dd9e942913bbc200" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 1211 Fish Hatchery Road, Madison, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 13,210             </div>`)[0];
+                popup_13334cfe52b372f4a6e55a712a0a96d9.setContent(html_03cdd825c683a225dd9e942913bbc200);
+            
+        
+
+        marker_0c512fa0e5487fe480382ce8de3f6d7c.bindPopup(popup_13334cfe52b372f4a6e55a712a0a96d9)
+        ;
+
+        
+    
+    
+            marker_0c512fa0e5487fe480382ce8de3f6d7c.bindTooltip(
+                `<div>
+                     SSM Health Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0c512fa0e5487fe480382ce8de3f6d7c.setIcon(icon_d6a3bfc217197d903c61a9baca7ee429);
+            
+    
+            var marker_ba11c7afcadd0452567999fb7cb21a34 = L.marker(
+                [43.0597418, -89.4023058],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_234fd1d9484ece51fa202e01ea1d9e78 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d6b848daf13351dcd161b89e653731b8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_725581c0b73cad34b366a9e32c382c58 = $(`<div id="html_725581c0b73cad34b366a9e32c382c58" style="width: 100.0%; height: 100.0%;">             <b>Imaging Services at SSM Health Outpatient Center</b><br>             <b>Type:</b> Imaging Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 703 S. Brooks St., Madison, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 13,210             </div>`)[0];
+                popup_d6b848daf13351dcd161b89e653731b8.setContent(html_725581c0b73cad34b366a9e32c382c58);
+            
+        
+
+        marker_ba11c7afcadd0452567999fb7cb21a34.bindPopup(popup_d6b848daf13351dcd161b89e653731b8)
+        ;
+
+        
+    
+    
+            marker_ba11c7afcadd0452567999fb7cb21a34.bindTooltip(
+                `<div>
+                     Imaging Services at SSM Health Outpatient Center - Imaging Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ba11c7afcadd0452567999fb7cb21a34.setIcon(icon_234fd1d9484ece51fa202e01ea1d9e78);
+            
+    
+            var marker_882135be8ac708e21660b33f8810101e = L.marker(
+                [38.6214405, -90.2392793],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_f20d39322485afe4a0f285f7d2dacf8b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_40d41b300a80a19cd44b1fabe5ad8451 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_70844a26fd7e0244356b4223b778a4d3 = $(`<div id="html_70844a26fd7e0244356b4223b778a4d3" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Cardinal Glennon Children's Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 1465 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_40d41b300a80a19cd44b1fabe5ad8451.setContent(html_70844a26fd7e0244356b4223b778a4d3);
+            
+        
+
+        marker_882135be8ac708e21660b33f8810101e.bindPopup(popup_40d41b300a80a19cd44b1fabe5ad8451)
+        ;
+
+        
+    
+    
+            marker_882135be8ac708e21660b33f8810101e.bindTooltip(
+                `<div>
+                     SSM Health Cardinal Glennon Children's Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_882135be8ac708e21660b33f8810101e.setIcon(icon_f20d39322485afe4a0f285f7d2dacf8b);
+            
+    
+            var marker_d52ebe38f2eddaa47ea64d231570ae22 = L.marker(
+                [35.3694922, -96.9286386],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_d282316c75e08a2a1d836cf756f76248 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightgreen",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_108af7a431a08a0a52322d843e13db98 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9138e383713021b502c9fcd2a329d3ca = $(`<div id="html_9138e383713021b502c9fcd2a329d3ca" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Primary Care<br>             <b>Specialty:</b> Family Medicine<br>             <b>Address:</b> 3700 N. Kickapoo Ave., Shawnee, OK<br>             <b>MSA:</b> Shawnee, OK Micropolitan Statistical Area<br>             <b>MSA Population:</b> 20,436             </div>`)[0];
+                popup_108af7a431a08a0a52322d843e13db98.setContent(html_9138e383713021b502c9fcd2a329d3ca);
+            
+        
+
+        marker_d52ebe38f2eddaa47ea64d231570ae22.bindPopup(popup_108af7a431a08a0a52322d843e13db98)
+        ;
+
+        
+    
+    
+            marker_d52ebe38f2eddaa47ea64d231570ae22.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Primary Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d52ebe38f2eddaa47ea64d231570ae22.setIcon(icon_d282316c75e08a2a1d836cf756f76248);
+            
+    
+            var marker_95d8bc7597c7fd25dcde6dd88a32ed1f = L.marker(
+                [38.6238312, -90.2375987],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_d52825a15f2275978085931ee43d0b0e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c95880a77c38d1db4d303cfa36843a53 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9cf04fd1f483192f682e6d20d335466f = $(`<div id="html_9cf04fd1f483192f682e6d20d335466f" style="width: 100.0%; height: 100.0%;">             <b>SLUCare Physician Group Sight & Sound Center</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> Ophthalmology<br>             <b>Address:</b> 1225 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_c95880a77c38d1db4d303cfa36843a53.setContent(html_9cf04fd1f483192f682e6d20d335466f);
+            
+        
+
+        marker_95d8bc7597c7fd25dcde6dd88a32ed1f.bindPopup(popup_c95880a77c38d1db4d303cfa36843a53)
+        ;
+
+        
+    
+    
+            marker_95d8bc7597c7fd25dcde6dd88a32ed1f.bindTooltip(
+                `<div>
+                     SLUCare Physician Group Sight & Sound Center - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_95d8bc7597c7fd25dcde6dd88a32ed1f.setIcon(icon_d52825a15f2275978085931ee43d0b0e);
+            
+    
+            var marker_8d8d27385aacc775b5c79dd4d185615c = L.marker(
+                [38.3390706, -89.3912879],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_81d76baa685837e21295be9c4d4f34fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9860d2165a237ba7e05b2ce8dd4f769d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b959cbfec93ecad68145d214aea61a22 = $(`<div id="html_b959cbfec93ecad68145d214aea61a22" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 705 S. Grand St., Nashville, IL<br>             <b>MSA:</b> 99999<br>             <b>MSA Population:</b> 5,181             </div>`)[0];
+                popup_9860d2165a237ba7e05b2ce8dd4f769d.setContent(html_b959cbfec93ecad68145d214aea61a22);
+            
+        
+
+        marker_8d8d27385aacc775b5c79dd4d185615c.bindPopup(popup_9860d2165a237ba7e05b2ce8dd4f769d)
+        ;
+
+        
+    
+    
+            marker_8d8d27385aacc775b5c79dd4d185615c.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8d8d27385aacc775b5c79dd4d185615c.setIcon(icon_81d76baa685837e21295be9c4d4f34fe);
+            
+    
+            var marker_7b138b34f2722a0494fdee40d39a8d7f = L.marker(
+                [38.6362618, -90.3443545],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_397ed4b75a5c2cde1f7ee66654b87109 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_45fe7e44183585865ed6b3198158eb68 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c15eeea79f333f4a05bf45cdb61c92b3 = $(`<div id="html_c15eeea79f333f4a05bf45cdb61c92b3" style="width: 100.0%; height: 100.0%;">             <b>SLUCare Physician Group</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1034 S. Brentwood Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 9,145             </div>`)[0];
+                popup_45fe7e44183585865ed6b3198158eb68.setContent(html_c15eeea79f333f4a05bf45cdb61c92b3);
+            
+        
+
+        marker_7b138b34f2722a0494fdee40d39a8d7f.bindPopup(popup_45fe7e44183585865ed6b3198158eb68)
+        ;
+
+        
+    
+    
+            marker_7b138b34f2722a0494fdee40d39a8d7f.bindTooltip(
+                `<div>
+                     SLUCare Physician Group - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7b138b34f2722a0494fdee40d39a8d7f.setIcon(icon_397ed4b75a5c2cde1f7ee66654b87109);
+            
+    
+            var marker_98288493e2307b49168efcd644c1d8db = L.marker(
+                [35.4781523, -97.5227697],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_31e5cc2b07fa51b546420121a2292ec3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_83294df07b044791a5c7a7b1162bd18e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_394e884d5211dcfe129becc58756874c = $(`<div id="html_394e884d5211dcfe129becc58756874c" style="width: 100.0%; height: 100.0%;">             <b>SSM Health St. Anthony Hospital - Oklahoma City</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1000 N. Lee Ave., Oklahoma City, OK<br>             <b>MSA:</b> Oklahoma City, OK Metropolitan Statistical Area<br>             <b>MSA Population:</b> 4,203             </div>`)[0];
+                popup_83294df07b044791a5c7a7b1162bd18e.setContent(html_394e884d5211dcfe129becc58756874c);
+            
+        
+
+        marker_98288493e2307b49168efcd644c1d8db.bindPopup(popup_83294df07b044791a5c7a7b1162bd18e)
+        ;
+
+        
+    
+    
+            marker_98288493e2307b49168efcd644c1d8db.bindTooltip(
+                `<div>
+                     SSM Health St. Anthony Hospital - Oklahoma City - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_98288493e2307b49168efcd644c1d8db.setIcon(icon_31e5cc2b07fa51b546420121a2292ec3);
+            
+    
+            var marker_e8085bc585f7016e2cbc2140ef6e9ba5 = L.marker(
+                [38.6214405, -90.2392793],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_32abe8076a99321225c644e9f473fd12 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_811ba36ce2224ed195937f1af2932c82 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_29e9c993425effc54354d5c2c559e5e6 = $(`<div id="html_29e9c993425effc54354d5c2c559e5e6" style="width: 100.0%; height: 100.0%;">             <b>Emergency Room at SSM Health Cardinal Glennon Children's Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Emergency Room<br>             <b>Address:</b> 1465 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_811ba36ce2224ed195937f1af2932c82.setContent(html_29e9c993425effc54354d5c2c559e5e6);
+            
+        
+
+        marker_e8085bc585f7016e2cbc2140ef6e9ba5.bindPopup(popup_811ba36ce2224ed195937f1af2932c82)
+        ;
+
+        
+    
+    
+            marker_e8085bc585f7016e2cbc2140ef6e9ba5.bindTooltip(
+                `<div>
+                     Emergency Room at SSM Health Cardinal Glennon Children's Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e8085bc585f7016e2cbc2140ef6e9ba5.setIcon(icon_32abe8076a99321225c644e9f473fd12);
+            
+    
+            var marker_53a3644a577ba8f5dbc51bb71ad99235 = L.marker(
+                [43.7784695, -88.4319909],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_93b4bc17a7a98322aae962467e388a74 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0fa8875bf03a233c659f7a5d7fa6d132 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a41fe6114e6e8095cf214351981dd846 = $(`<div id="html_a41fe6114e6e8095cf214351981dd846" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Imaging Services</b><br>             <b>Type:</b> Imaging Services<br>             <b>Specialty:</b> Mammography<br>             <b>Address:</b> 430 E. Division St., Fond Du Lac, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 41,860             </div>`)[0];
+                popup_0fa8875bf03a233c659f7a5d7fa6d132.setContent(html_a41fe6114e6e8095cf214351981dd846);
+            
+        
+
+        marker_53a3644a577ba8f5dbc51bb71ad99235.bindPopup(popup_0fa8875bf03a233c659f7a5d7fa6d132)
+        ;
+
+        
+    
+    
+            marker_53a3644a577ba8f5dbc51bb71ad99235.bindTooltip(
+                `<div>
+                     SSM Health Imaging Services - Imaging Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53a3644a577ba8f5dbc51bb71ad99235.setIcon(icon_93b4bc17a7a98322aae962467e388a74);
+            
+    
+            var marker_83c7c227f038950465afa9d4ef5b267c = L.marker(
+                [43.8353003, -88.8185867],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_cbc50f648e8eab33456ab83c5266e976 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_36679161fe2ef6ee480ca2140933a105 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4ea7b52547feb7575e5af2b0821d5cdf = $(`<div id="html_4ea7b52547feb7575e5af2b0821d5cdf" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Fond du Lac Regional Clinic</b><br>             <b>Type:</b> Pediatrics<br>             <b>Specialty:</b> Pediatrics<br>             <b>Address:</b> 835 Parkside St., Ripon, WI<br>             <b>MSA:</b> 99999<br>             <b>MSA Population:</b> 595             </div>`)[0];
+                popup_36679161fe2ef6ee480ca2140933a105.setContent(html_4ea7b52547feb7575e5af2b0821d5cdf);
+            
+        
+
+        marker_83c7c227f038950465afa9d4ef5b267c.bindPopup(popup_36679161fe2ef6ee480ca2140933a105)
+        ;
+
+        
+    
+    
+            marker_83c7c227f038950465afa9d4ef5b267c.bindTooltip(
+                `<div>
+                     SSM Health Fond du Lac Regional Clinic - Pediatrics
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_83c7c227f038950465afa9d4ef5b267c.setIcon(icon_cbc50f648e8eab33456ab83c5266e976);
+            
+    
+            var marker_b48f45eb7839869a3a66bf450f633098 = L.marker(
+                [38.6438155, -90.3350111],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_b24d758a3edab35c8abc63f5e64d63b0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_406f5bd3e5f4fa816159ee8b8c31ba3c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_93a823b198b81ad5994d3b0d7d3f2949 = $(`<div id="html_93a823b198b81ad5994d3b0d7d3f2949" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Physical Therapy</b><br>             <b>Type:</b> Therapy Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 509 S. Hanley Rd., Clayton, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 17,635             </div>`)[0];
+                popup_406f5bd3e5f4fa816159ee8b8c31ba3c.setContent(html_93a823b198b81ad5994d3b0d7d3f2949);
+            
+        
+
+        marker_b48f45eb7839869a3a66bf450f633098.bindPopup(popup_406f5bd3e5f4fa816159ee8b8c31ba3c)
+        ;
+
+        
+    
+    
+            marker_b48f45eb7839869a3a66bf450f633098.bindTooltip(
+                `<div>
+                     SSM Health Physical Therapy - Therapy Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b48f45eb7839869a3a66bf450f633098.setIcon(icon_b24d758a3edab35c8abc63f5e64d63b0);
+            
+    
+            var marker_45d90db81dc41bfcfcf61834c49086bc = L.marker(
+                [38.7386669, -90.6217535],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_9a5e42f4d0741ac8d7666c093a2f4ae1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_77b61f5300ed7ef0c0545b08bce28eca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_208dbda7d0e49367a57e05d8a3ee1b53 = $(`<div id="html_208dbda7d0e49367a57e05d8a3ee1b53" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Orthopedics - Kisker Road</b><br>             <b>Type:</b> Orthopedics<br>             <b>Specialty:</b> Orthopedics<br>             <b>Address:</b> 1475 Kisker Road, St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 43,741             </div>`)[0];
+                popup_77b61f5300ed7ef0c0545b08bce28eca.setContent(html_208dbda7d0e49367a57e05d8a3ee1b53);
+            
+        
+
+        marker_45d90db81dc41bfcfcf61834c49086bc.bindPopup(popup_77b61f5300ed7ef0c0545b08bce28eca)
+        ;
+
+        
+    
+    
+            marker_45d90db81dc41bfcfcf61834c49086bc.bindTooltip(
+                `<div>
+                     SSM Health Orthopedics - Kisker Road - Orthopedics
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_45d90db81dc41bfcfcf61834c49086bc.setIcon(icon_9a5e42f4d0741ac8d7666c093a2f4ae1);
+            
+    
+            var marker_87432ac6109cfc9b0bae7b90867bc9fb = L.marker(
+                [38.8221504, -90.880721],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_63c01d374ad8dff7a3336c01d3447928 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0bf9f2cdb2f2203c8cecf650937b43ce = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_701971ce4800f3f024e87fc86db88444 = $(`<div id="html_701971ce4800f3f024e87fc86db88444" style="width: 100.0%; height: 100.0%;">             <b>Emergency Room at SSM Health St. Joseph Hospital - Wentzville</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Emergency Room<br>             <b>Address:</b> 500 Medical Drive, Wentzville, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 38,768             </div>`)[0];
+                popup_0bf9f2cdb2f2203c8cecf650937b43ce.setContent(html_701971ce4800f3f024e87fc86db88444);
+            
+        
+
+        marker_87432ac6109cfc9b0bae7b90867bc9fb.bindPopup(popup_0bf9f2cdb2f2203c8cecf650937b43ce)
+        ;
+
+        
+    
+    
+            marker_87432ac6109cfc9b0bae7b90867bc9fb.bindTooltip(
+                `<div>
+                     Emergency Room at SSM Health St. Joseph Hospital - Wentzville - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_87432ac6109cfc9b0bae7b90867bc9fb.setIcon(icon_63c01d374ad8dff7a3336c01d3447928);
+            
+    
+            var marker_d964208b95f2ad5ba511416c6b0094b7 = L.marker(
+                [38.0098457, -88.9181919],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_a47dfa3810e9dd02935cf8568d25f5d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_df182ddf27b622a93c1cad1b6a04adf3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f9893b6f3acb2735f865c2b7514bc0c9 = $(`<div id="html_f9893b6f3acb2735f865c2b7514bc0c9" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> Surgery-General<br>             <b>Address:</b> 201 Bailey Lane, Benton, IL<br>             <b>MSA:</b> 99999<br>             <b>MSA Population:</b> 11,150             </div>`)[0];
+                popup_df182ddf27b622a93c1cad1b6a04adf3.setContent(html_f9893b6f3acb2735f865c2b7514bc0c9);
+            
+        
+
+        marker_d964208b95f2ad5ba511416c6b0094b7.bindPopup(popup_df182ddf27b622a93c1cad1b6a04adf3)
+        ;
+
+        
+    
+    
+            marker_d964208b95f2ad5ba511416c6b0094b7.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d964208b95f2ad5ba511416c6b0094b7.setIcon(icon_a47dfa3810e9dd02935cf8568d25f5d3);
+            
+    
+            var marker_f1764d7dc3c908c47fe6bf882cfc4cba = L.marker(
+                [43.6320819, -88.745819],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_9e74d8d5a5a930e46cf4d70a56ea1551 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5fa9fce1de5074f485c9ea52d7520d44 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6e7cee203774dd5b29d3bb7eb2850b60 = $(`<div id="html_6e7cee203774dd5b29d3bb7eb2850b60" style="width: 100.0%; height: 100.0%;">             <b>Sports Medicine at SSM Health Waupun Memorial Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 620 W. Brown St., Waupun, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 5,229             </div>`)[0];
+                popup_5fa9fce1de5074f485c9ea52d7520d44.setContent(html_6e7cee203774dd5b29d3bb7eb2850b60);
+            
+        
+
+        marker_f1764d7dc3c908c47fe6bf882cfc4cba.bindPopup(popup_5fa9fce1de5074f485c9ea52d7520d44)
+        ;
+
+        
+    
+    
+            marker_f1764d7dc3c908c47fe6bf882cfc4cba.bindTooltip(
+                `<div>
+                     Sports Medicine at SSM Health Waupun Memorial Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f1764d7dc3c908c47fe6bf882cfc4cba.setIcon(icon_9e74d8d5a5a930e46cf4d70a56ea1551);
+            
+    
+            var marker_9307a64434314b68d9d15aa565cab6c8 = L.marker(
+                [38.6238312, -90.2375987],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_200881eb642fcc50a9cf7cbb3069f649 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_077a2cd770b47ac8c71130a5d2eb7545 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_04003387b6c3da60a6e0f5ce0f7787ef = $(`<div id="html_04003387b6c3da60a6e0f5ce0f7787ef" style="width: 100.0%; height: 100.0%;">             <b>SLUCare Physician Group</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> ENT-Otolaryngology<br>             <b>Address:</b> 1225 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_077a2cd770b47ac8c71130a5d2eb7545.setContent(html_04003387b6c3da60a6e0f5ce0f7787ef);
+            
+        
+
+        marker_9307a64434314b68d9d15aa565cab6c8.bindPopup(popup_077a2cd770b47ac8c71130a5d2eb7545)
+        ;
+
+        
+    
+    
+            marker_9307a64434314b68d9d15aa565cab6c8.bindTooltip(
+                `<div>
+                     SLUCare Physician Group - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9307a64434314b68d9d15aa565cab6c8.setIcon(icon_200881eb642fcc50a9cf7cbb3069f649);
+            
+    
+            var marker_39aabbf835dd2fbb26124325a4ebf0f3 = L.marker(
+                [38.8241805, -90.8785207],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_5530eecced7b939e511cad76c2c2f2f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a16d90288d39ccab260b889b0f609b1d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fa5741284b4c781f9caafb7ac162bcd9 = $(`<div id="html_fa5741284b4c781f9caafb7ac162bcd9" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Pediatrics<br>             <b>Specialty:</b> Pediatrics<br>             <b>Address:</b> 1598 W. Meyer Road, Wentzville, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 38,768             </div>`)[0];
+                popup_a16d90288d39ccab260b889b0f609b1d.setContent(html_fa5741284b4c781f9caafb7ac162bcd9);
+            
+        
+
+        marker_39aabbf835dd2fbb26124325a4ebf0f3.bindPopup(popup_a16d90288d39ccab260b889b0f609b1d)
+        ;
+
+        
+    
+    
+            marker_39aabbf835dd2fbb26124325a4ebf0f3.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Pediatrics
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_39aabbf835dd2fbb26124325a4ebf0f3.setIcon(icon_5530eecced7b939e511cad76c2c2f2f3);
+            
+    
+            var marker_f6bda06160b3bd888c4c3bf451871a77 = L.marker(
+                [43.4807607, -89.7284645],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_9286dc5a82d5345c1929769335c20529 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9032901fe3bfd02799837b7553385e91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1d29a87bea72779578977a1042ca0186 = $(`<div id="html_1d29a87bea72779578977a1042ca0186" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Tommy Bartlett Child Care Center</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> Childcare Centers<br>             <b>Address:</b> 1605 Jefferson St., Baraboo, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 7             </div>`)[0];
+                popup_9032901fe3bfd02799837b7553385e91.setContent(html_1d29a87bea72779578977a1042ca0186);
+            
+        
+
+        marker_f6bda06160b3bd888c4c3bf451871a77.bindPopup(popup_9032901fe3bfd02799837b7553385e91)
+        ;
+
+        
+    
+    
+            marker_f6bda06160b3bd888c4c3bf451871a77.bindTooltip(
+                `<div>
+                     SSM Health Tommy Bartlett Child Care Center - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6bda06160b3bd888c4c3bf451871a77.setIcon(icon_9286dc5a82d5345c1929769335c20529);
+            
+    
+            var marker_3b181c468c00824c5d00010cbe3ed305 = L.marker(
+                [43.8343313, -88.8176349],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_393f7d19444146e1265235baade66b5a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_02e06c7f09383b3699a00947d1fd54a6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5789c87f2f9ac19ef1b84ef4c64ac2b3 = $(`<div id="html_5789c87f2f9ac19ef1b84ef4c64ac2b3" style="width: 100.0%; height: 100.0%;">             <b>Behavioral Health Walk-in Clinic at SSM Health Ripon Community Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Behavioral Health<br>             <b>Address:</b> 845 Parkside St., Ripon, WI<br>             <b>MSA:</b> 99999<br>             <b>MSA Population:</b> 595             </div>`)[0];
+                popup_02e06c7f09383b3699a00947d1fd54a6.setContent(html_5789c87f2f9ac19ef1b84ef4c64ac2b3);
+            
+        
+
+        marker_3b181c468c00824c5d00010cbe3ed305.bindPopup(popup_02e06c7f09383b3699a00947d1fd54a6)
+        ;
+
+        
+    
+    
+            marker_3b181c468c00824c5d00010cbe3ed305.bindTooltip(
+                `<div>
+                     Behavioral Health Walk-in Clinic at SSM Health Ripon Community Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3b181c468c00824c5d00010cbe3ed305.setIcon(icon_393f7d19444146e1265235baade66b5a);
+            
+    
+            var marker_100a494fc1c49f11f76c9db1103a7689 = L.marker(
+                [38.5585442, -92.2220521],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_16e3aa416b5e28042aac5e75c69557f5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a58f735b35894f57d826f421c5dc107a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9ff7f19551fe2507f0c34d4388469a2b = $(`<div id="html_9ff7f19551fe2507f0c34d4388469a2b" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Wound Center</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> Wound Care<br>             <b>Address:</b> 2505 Mission Drive, Jefferson City, MO<br>             <b>MSA:</b> Jefferson City, MO Metropolitan Statistical Area<br>             <b>MSA Population:</b> 38,411             </div>`)[0];
+                popup_a58f735b35894f57d826f421c5dc107a.setContent(html_9ff7f19551fe2507f0c34d4388469a2b);
+            
+        
+
+        marker_100a494fc1c49f11f76c9db1103a7689.bindPopup(popup_a58f735b35894f57d826f421c5dc107a)
+        ;
+
+        
+    
+    
+            marker_100a494fc1c49f11f76c9db1103a7689.bindTooltip(
+                `<div>
+                     SSM Health Wound Center - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_100a494fc1c49f11f76c9db1103a7689.setIcon(icon_16e3aa416b5e28042aac5e75c69557f5);
+            
+    
+            var marker_871eae38c5d8326d2c4af1664b47f275 = L.marker(
+                [43.6310743, -88.7452046],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_7eacbcc208567fb93564ec57067e8506 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_12cec3e020c8da18cf3d19e1abddd9cf = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9149c5412d874834f26f509ff95ef120 = $(`<div id="html_9149c5412d874834f26f509ff95ef120" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Fond du Lac Regional Clinic</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 608 W. Brown St., Waupun, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 5,229             </div>`)[0];
+                popup_12cec3e020c8da18cf3d19e1abddd9cf.setContent(html_9149c5412d874834f26f509ff95ef120);
+            
+        
+
+        marker_871eae38c5d8326d2c4af1664b47f275.bindPopup(popup_12cec3e020c8da18cf3d19e1abddd9cf)
+        ;
+
+        
+    
+    
+            marker_871eae38c5d8326d2c4af1664b47f275.bindTooltip(
+                `<div>
+                     SSM Health Fond du Lac Regional Clinic - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_871eae38c5d8326d2c4af1664b47f275.setIcon(icon_7eacbcc208567fb93564ec57067e8506);
+            
+    
+            var marker_caa11e932b51c3db7b24638545ecf24a = L.marker(
+                [38.6340467, -90.3102043],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_4031878ae0dae43a6707d3cd9aab48c0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7ec34d74b919b59970d4c1bbc3c8d424 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ff41f6e352002763ffcef6e42beccb2f = $(`<div id="html_ff41f6e352002763ffcef6e42beccb2f" style="width: 100.0%; height: 100.0%;">             <b>WISH Center at SSM Health St. Mary's Hospital - St. Louis</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Obstetrics and Gynecology<br>             <b>Address:</b> 6420 Clayton Road, St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 9,145             </div>`)[0];
+                popup_7ec34d74b919b59970d4c1bbc3c8d424.setContent(html_ff41f6e352002763ffcef6e42beccb2f);
+            
+        
+
+        marker_caa11e932b51c3db7b24638545ecf24a.bindPopup(popup_7ec34d74b919b59970d4c1bbc3c8d424)
+        ;
+
+        
+    
+    
+            marker_caa11e932b51c3db7b24638545ecf24a.bindTooltip(
+                `<div>
+                     WISH Center at SSM Health St. Mary's Hospital - St. Louis - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_caa11e932b51c3db7b24638545ecf24a.setIcon(icon_4031878ae0dae43a6707d3cd9aab48c0);
+            
+    
+            var marker_bc063e2ff1851fcf9212521203baf5a2 = L.marker(
+                [43.1988178, -89.2113602],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_5566ce744476233651703d451256708f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_33f87f60888e15ddb16feaf7e0b2964f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d9187cfeb85bd770569f8e3cb401a0a3 = $(`<div id="html_d9187cfeb85bd770569f8e3cb401a0a3" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Dean Medical Group</b><br>             <b>Type:</b> Pediatrics<br>             <b>Specialty:</b> Pediatrics<br>             <b>Address:</b> 10 Tower Drive, Sun Prairie, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 39,506             </div>`)[0];
+                popup_33f87f60888e15ddb16feaf7e0b2964f.setContent(html_d9187cfeb85bd770569f8e3cb401a0a3);
+            
+        
+
+        marker_bc063e2ff1851fcf9212521203baf5a2.bindPopup(popup_33f87f60888e15ddb16feaf7e0b2964f)
+        ;
+
+        
+    
+    
+            marker_bc063e2ff1851fcf9212521203baf5a2.bindTooltip(
+                `<div>
+                     SSM Health Dean Medical Group - Pediatrics
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bc063e2ff1851fcf9212521203baf5a2.setIcon(icon_5566ce744476233651703d451256708f);
+            
+    
+            var marker_407740380152b8626e3a1e64cb48e5cf = L.marker(
+                [35.4781523, -97.5227697],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_6ed851fe46497576f95f489c6e21f83a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aadf55c945f81f0def6282ce784f9696 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5ed6df7be226d772bbab40437a721770 = $(`<div id="html_5ed6df7be226d772bbab40437a721770" style="width: 100.0%; height: 100.0%;">             <b>Wound Center at SSM Health St. Anthony Hospital - Oklahoma City</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Wound Care<br>             <b>Address:</b> 1000 N. Lee Ave., Oklahoma City, OK<br>             <b>MSA:</b> Oklahoma City, OK Metropolitan Statistical Area<br>             <b>MSA Population:</b> 4,203             </div>`)[0];
+                popup_aadf55c945f81f0def6282ce784f9696.setContent(html_5ed6df7be226d772bbab40437a721770);
+            
+        
+
+        marker_407740380152b8626e3a1e64cb48e5cf.bindPopup(popup_aadf55c945f81f0def6282ce784f9696)
+        ;
+
+        
+    
+    
+            marker_407740380152b8626e3a1e64cb48e5cf.bindTooltip(
+                `<div>
+                     Wound Center at SSM Health St. Anthony Hospital - Oklahoma City - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_407740380152b8626e3a1e64cb48e5cf.setIcon(icon_6ed851fe46497576f95f489c6e21f83a);
+            
+    
+            var marker_7fabf2e06044408f0d917c20bf761e31 = L.marker(
+                [43.0585906, -89.4042471],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_229b290e864afded7a5d6799bbf3d560 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_829667948fa05ab5107b0c42ec8beb8e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f766069d2f439ff2f7e0f5e857b09cf = $(`<div id="html_7f766069d2f439ff2f7e0f5e857b09cf" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 700 S. Park St., Madison, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 13,210             </div>`)[0];
+                popup_829667948fa05ab5107b0c42ec8beb8e.setContent(html_7f766069d2f439ff2f7e0f5e857b09cf);
+            
+        
+
+        marker_7fabf2e06044408f0d917c20bf761e31.bindPopup(popup_829667948fa05ab5107b0c42ec8beb8e)
+        ;
+
+        
+    
+    
+            marker_7fabf2e06044408f0d917c20bf761e31.bindTooltip(
+                `<div>
+                     SSM Health Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7fabf2e06044408f0d917c20bf761e31.setIcon(icon_229b290e864afded7a5d6799bbf3d560);
+            
+    
+            var marker_133ac6dc4c60b718d393d680acb5255b = L.marker(
+                [38.6214405, -90.2392793],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_e4cd71d233b67cf471dabb8fb78decfa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c85d9704be6d0e6c8286a864fcc1e9f5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9d584dc4b65cbd32bc34b363e3c51673 = $(`<div id="html_9d584dc4b65cbd32bc34b363e3c51673" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Cardinal Glennon Children's Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1465 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_c85d9704be6d0e6c8286a864fcc1e9f5.setContent(html_9d584dc4b65cbd32bc34b363e3c51673);
+            
+        
+
+        marker_133ac6dc4c60b718d393d680acb5255b.bindPopup(popup_c85d9704be6d0e6c8286a864fcc1e9f5)
+        ;
+
+        
+    
+    
+            marker_133ac6dc4c60b718d393d680acb5255b.bindTooltip(
+                `<div>
+                     SSM Health Cardinal Glennon Children's Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_133ac6dc4c60b718d393d680acb5255b.setIcon(icon_e4cd71d233b67cf471dabb8fb78decfa);
+            
+    
+            var marker_6e85a5221d0971ecc65d937e74a4757b = L.marker(
+                [43.6331801, -88.7515425],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_a807f6b134bb4acf6836698bcb6c9fc4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_735b2809eefc08faaab1e6ccad1fc853 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_16b49308fc6e18ed07cbbf475dd3570c = $(`<div id="html_16b49308fc6e18ed07cbbf475dd3570c" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 904 W. Main St., Waupun, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 5,229             </div>`)[0];
+                popup_735b2809eefc08faaab1e6ccad1fc853.setContent(html_16b49308fc6e18ed07cbbf475dd3570c);
+            
+        
+
+        marker_6e85a5221d0971ecc65d937e74a4757b.bindPopup(popup_735b2809eefc08faaab1e6ccad1fc853)
+        ;
+
+        
+    
+    
+            marker_6e85a5221d0971ecc65d937e74a4757b.bindTooltip(
+                `<div>
+                     SSM Health Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6e85a5221d0971ecc65d937e74a4757b.setIcon(icon_a807f6b134bb4acf6836698bcb6c9fc4);
+            
+    
+            var marker_db665000eefc9531d861c9464ca058f7 = L.marker(
+                [38.6232147, -88.9579658],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_d4dda55f621bb3cfcb89cdcd5ec25092 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightgreen",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bb943ca446bbecade33d896ff242376f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_233c26edc8102e992b35790558ceaaef = $(`<div id="html_233c26edc8102e992b35790558ceaaef" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Primary Care<br>             <b>Specialty:</b> Family Medicine<br>             <b>Address:</b> 1250 W. Whittaker St., Salem, IL<br>             <b>MSA:</b> Centralia, IL Micropolitan Statistical Area<br>             <b>MSA Population:</b> 11,011             </div>`)[0];
+                popup_bb943ca446bbecade33d896ff242376f.setContent(html_233c26edc8102e992b35790558ceaaef);
+            
+        
+
+        marker_db665000eefc9531d861c9464ca058f7.bindPopup(popup_bb943ca446bbecade33d896ff242376f)
+        ;
+
+        
+    
+    
+            marker_db665000eefc9531d861c9464ca058f7.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Primary Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_db665000eefc9531d861c9464ca058f7.setIcon(icon_d4dda55f621bb3cfcb89cdcd5ec25092);
+            
+    
+            var marker_8b7c5e3b9c8bc6d5263c1e335195a410 = L.marker(
+                [38.6340467, -90.3102043],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_53ee692275d91049974854229a3cb4ed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9e45ed61af3645a1d5b1dbb29c27756 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_00726d63c848204c54d29a8cf09a4aea = $(`<div id="html_00726d63c848204c54d29a8cf09a4aea" style="width: 100.0%; height: 100.0%;">             <b>WISH Center at SSM Health St. Mary's Hospital - St. Louis</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Obstetrics and Gynecology<br>             <b>Address:</b> 6420 Clayton Road, St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 9,145             </div>`)[0];
+                popup_a9e45ed61af3645a1d5b1dbb29c27756.setContent(html_00726d63c848204c54d29a8cf09a4aea);
+            
+        
+
+        marker_8b7c5e3b9c8bc6d5263c1e335195a410.bindPopup(popup_a9e45ed61af3645a1d5b1dbb29c27756)
+        ;
+
+        
+    
+    
+            marker_8b7c5e3b9c8bc6d5263c1e335195a410.bindTooltip(
+                `<div>
+                     WISH Center at SSM Health St. Mary's Hospital - St. Louis - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8b7c5e3b9c8bc6d5263c1e335195a410.setIcon(icon_53ee692275d91049974854229a3cb4ed);
+            
+    
+            var marker_f70332ad0c034530366685160ab492be = L.marker(
+                [37.2494857, -93.2657398],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_f77961e2432520a9998a1c1083f301d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0ab932c5c0701a76ea1e598e3b413461 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1a6e6835b95111906439e8a78b2f3855 = $(`<div id="html_1a6e6835b95111906439e8a78b2f3855" style="width: 100.0%; height: 100.0%;">             <b>Transplant Clinic at SSM Health Saint Louis University Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1540 E. Evergreen St., Springfield, MO<br>             <b>MSA:</b> Springfield, MO Metropolitan Statistical Area<br>             <b>MSA Population:</b> 42,911             </div>`)[0];
+                popup_0ab932c5c0701a76ea1e598e3b413461.setContent(html_1a6e6835b95111906439e8a78b2f3855);
+            
+        
+
+        marker_f70332ad0c034530366685160ab492be.bindPopup(popup_0ab932c5c0701a76ea1e598e3b413461)
+        ;
+
+        
+    
+    
+            marker_f70332ad0c034530366685160ab492be.bindTooltip(
+                `<div>
+                     Transplant Clinic at SSM Health Saint Louis University Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f70332ad0c034530366685160ab492be.setIcon(icon_f77961e2432520a9998a1c1083f301d6);
+            
+    
+            var marker_e28d4d719e971f35b5fc9e62dfdf3ca6 = L.marker(
+                [38.7809305, -90.4848619],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_a5dde19eeac3007235cf22683acd5a98 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_39c69d407f8ec16632571462ead1766f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_98ca741b69db21c6a7f3ba405e7749e3 = $(`<div id="html_98ca741b69db21c6a7f3ba405e7749e3" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 300 First Capitol Drive, St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 52,610             </div>`)[0];
+                popup_39c69d407f8ec16632571462ead1766f.setContent(html_98ca741b69db21c6a7f3ba405e7749e3);
+            
+        
+
+        marker_e28d4d719e971f35b5fc9e62dfdf3ca6.bindPopup(popup_39c69d407f8ec16632571462ead1766f)
+        ;
+
+        
+    
+    
+            marker_e28d4d719e971f35b5fc9e62dfdf3ca6.bindTooltip(
+                `<div>
+                     SSM Health Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e28d4d719e971f35b5fc9e62dfdf3ca6.setIcon(icon_a5dde19eeac3007235cf22683acd5a98);
+            
+    
+            var marker_c11bb09391beb8e0044a188dcd58a043 = L.marker(
+                [38.8241805, -90.8785207],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_b19b8026a2eecfb709324bee53570965 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5641c961c54056ae325e916b97dffa40 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b2e0a300c9681d8322aa858013debfc8 = $(`<div id="html_b2e0a300c9681d8322aa858013debfc8" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Imaging Services</b><br>             <b>Type:</b> Imaging Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1598 W. Meyer Road, Wentzville, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 38,768             </div>`)[0];
+                popup_5641c961c54056ae325e916b97dffa40.setContent(html_b2e0a300c9681d8322aa858013debfc8);
+            
+        
+
+        marker_c11bb09391beb8e0044a188dcd58a043.bindPopup(popup_5641c961c54056ae325e916b97dffa40)
+        ;
+
+        
+    
+    
+            marker_c11bb09391beb8e0044a188dcd58a043.bindTooltip(
+                `<div>
+                     SSM Health Imaging Services - Imaging Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c11bb09391beb8e0044a188dcd58a043.setIcon(icon_b19b8026a2eecfb709324bee53570965);
+            
+    
+            var marker_b7b57482919b1e225d809bbd74bf6c53 = L.marker(
+                [38.7386669, -90.6217535],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_ec202464a4e1aa03d68d83ccde810b88 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7cabb6e7ad614473579bd542f16f4e91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7d60832568e05ba98288219b1432fc3d = $(`<div id="html_7d60832568e05ba98288219b1432fc3d" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Heart & Vascular Care</b><br>             <b>Type:</b> Cardiology<br>             <b>Specialty:</b> Cardiology<br>             <b>Address:</b> 1475 Kisker Road, St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 43,741             </div>`)[0];
+                popup_7cabb6e7ad614473579bd542f16f4e91.setContent(html_7d60832568e05ba98288219b1432fc3d);
+            
+        
+
+        marker_b7b57482919b1e225d809bbd74bf6c53.bindPopup(popup_7cabb6e7ad614473579bd542f16f4e91)
+        ;
+
+        
+    
+    
+            marker_b7b57482919b1e225d809bbd74bf6c53.bindTooltip(
+                `<div>
+                     SSM Health Heart & Vascular Care - Cardiology
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b7b57482919b1e225d809bbd74bf6c53.setIcon(icon_ec202464a4e1aa03d68d83ccde810b88);
+            
+    
+            var marker_8e83eaad43cfadff33b732eedfad0571 = L.marker(
+                [43.0540242, -89.3988802],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_dfca59b14b20a9cbf36d7b9b2ce695f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4586488579de24a308c53968b24d4e1d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_04747ca08021737cfe8594ea7c56d4c2 = $(`<div id="html_04747ca08021737cfe8594ea7c56d4c2" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Dean Medical Group</b><br>             <b>Type:</b> Pediatrics<br>             <b>Specialty:</b> Pediatrics<br>             <b>Address:</b> 1211 Fish Hatchery Road, Madison, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 13,210             </div>`)[0];
+                popup_4586488579de24a308c53968b24d4e1d.setContent(html_04747ca08021737cfe8594ea7c56d4c2);
+            
+        
+
+        marker_8e83eaad43cfadff33b732eedfad0571.bindPopup(popup_4586488579de24a308c53968b24d4e1d)
+        ;
+
+        
+    
+    
+            marker_8e83eaad43cfadff33b732eedfad0571.bindTooltip(
+                `<div>
+                     SSM Health Dean Medical Group - Pediatrics
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8e83eaad43cfadff33b732eedfad0571.setIcon(icon_dfca59b14b20a9cbf36d7b9b2ce695f6);
+            
+    
+            var marker_b622c9bbc2b4e3dd01182432983f6dbd = L.marker(
+                [38.6157984, -90.2396247],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_da9bad6b234179b5f5e81cf733efe432 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_90908a88a902e1d9e10d49e10403f012 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_854bfe3dd4f803910f4560b111848f73 = $(`<div id="html_854bfe3dd4f803910f4560b111848f73" style="width: 100.0%; height: 100.0%;">             <b>Outpatient Surgery at SSM Health Saint Louis University Hospital - South Campus</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Surgery-General<br>             <b>Address:</b> 1755 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_90908a88a902e1d9e10d49e10403f012.setContent(html_854bfe3dd4f803910f4560b111848f73);
+            
+        
+
+        marker_b622c9bbc2b4e3dd01182432983f6dbd.bindPopup(popup_90908a88a902e1d9e10d49e10403f012)
+        ;
+
+        
+    
+    
+            marker_b622c9bbc2b4e3dd01182432983f6dbd.bindTooltip(
+                `<div>
+                     Outpatient Surgery at SSM Health Saint Louis University Hospital - South Campus - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b622c9bbc2b4e3dd01182432983f6dbd.setIcon(icon_da9bad6b234179b5f5e81cf733efe432);
+            
+    
+            var marker_074f862256bb86cdf1f94dd4952d2dd2 = L.marker(
+                [38.623991, -90.23754],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_47ea973acb20453496c05701829bfb02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8297bdcf2c2a1b3a0c3b4a6a57649014 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ced04f6f91810902b17d6e69bb6806f0 = $(`<div id="html_ced04f6f91810902b17d6e69bb6806f0" style="width: 100.0%; height: 100.0%;">             <b>Dialysis at SSM Health Saint Louis University Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Dialysis<br>             <b>Address:</b> 1201 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_8297bdcf2c2a1b3a0c3b4a6a57649014.setContent(html_ced04f6f91810902b17d6e69bb6806f0);
+            
+        
+
+        marker_074f862256bb86cdf1f94dd4952d2dd2.bindPopup(popup_8297bdcf2c2a1b3a0c3b4a6a57649014)
+        ;
+
+        
+    
+    
+            marker_074f862256bb86cdf1f94dd4952d2dd2.bindTooltip(
+                `<div>
+                     Dialysis at SSM Health Saint Louis University Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_074f862256bb86cdf1f94dd4952d2dd2.setIcon(icon_47ea973acb20453496c05701829bfb02);
+            
+    
+            var marker_f250d4b86b2661222bb0152dd90c8a55 = L.marker(
+                [38.8259307, -90.5183012],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_2784fd9ad32a457adc8f02a84e8505cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ddde3daa433bebe44e84dc2de570fd5f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_afff3afb9c05bb52df2b6dedb5c96129 = $(`<div id="html_afff3afb9c05bb52df2b6dedb5c96129" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Physical Therapy</b><br>             <b>Type:</b> Therapy Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 3789 New Town Blvd., St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 52,610             </div>`)[0];
+                popup_ddde3daa433bebe44e84dc2de570fd5f.setContent(html_afff3afb9c05bb52df2b6dedb5c96129);
+            
+        
+
+        marker_f250d4b86b2661222bb0152dd90c8a55.bindPopup(popup_ddde3daa433bebe44e84dc2de570fd5f)
+        ;
+
+        
+    
+    
+            marker_f250d4b86b2661222bb0152dd90c8a55.bindTooltip(
+                `<div>
+                     SSM Health Physical Therapy - Therapy Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f250d4b86b2661222bb0152dd90c8a55.setIcon(icon_2784fd9ad32a457adc8f02a84e8505cb);
+            
+    
+            var marker_dfd584f6292476059c47124b48103252 = L.marker(
+                [35.3784955, -96.9119689],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_23bcdaf4a1b16139e4535878387ef735 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_836b50f4ce590c581f33af5a1a748064 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_312042d2cb46ccd4fd5ebf34e393367c = $(`<div id="html_312042d2cb46ccd4fd5ebf34e393367c" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Imaging Services<br>             <b>Specialty:</b> Mammography<br>             <b>Address:</b> 4651 N. Harrison St., Shawnee, OK<br>             <b>MSA:</b> Shawnee, OK Micropolitan Statistical Area<br>             <b>MSA Population:</b> 20,436             </div>`)[0];
+                popup_836b50f4ce590c581f33af5a1a748064.setContent(html_312042d2cb46ccd4fd5ebf34e393367c);
+            
+        
+
+        marker_dfd584f6292476059c47124b48103252.bindPopup(popup_836b50f4ce590c581f33af5a1a748064)
+        ;
+
+        
+    
+    
+            marker_dfd584f6292476059c47124b48103252.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Imaging Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dfd584f6292476059c47124b48103252.setIcon(icon_23bcdaf4a1b16139e4535878387ef735);
+            
+    
+            var marker_364410edeb94ca654ac9538143fe07f6 = L.marker(
+                [38.6438155, -90.3350111],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_1c62a70cc376ac5c155bb232c3bd513b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_34c14d71283fd651209917fac620d475 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ac364b9e138a4ee9df3dad333c7bbbd9 = $(`<div id="html_ac364b9e138a4ee9df3dad333c7bbbd9" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Physical Therapy</b><br>             <b>Type:</b> Therapy Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 509 S. Hanley Rd., Clayton, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 17,635             </div>`)[0];
+                popup_34c14d71283fd651209917fac620d475.setContent(html_ac364b9e138a4ee9df3dad333c7bbbd9);
+            
+        
+
+        marker_364410edeb94ca654ac9538143fe07f6.bindPopup(popup_34c14d71283fd651209917fac620d475)
+        ;
+
+        
+    
+    
+            marker_364410edeb94ca654ac9538143fe07f6.bindTooltip(
+                `<div>
+                     SSM Health Physical Therapy - Therapy Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_364410edeb94ca654ac9538143fe07f6.setIcon(icon_1c62a70cc376ac5c155bb232c3bd513b);
+            
+    
+            var marker_e3d229ad3f09d192cc5f3bade9b2c8f8 = L.marker(
+                [43.6320819, -88.745819],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_a010e1d79bf49b6859ebd04be9927cc9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_22cb549f904a05e5b37b2df7ca4623c3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_392998e2e52b7570e613b964f202f31d = $(`<div id="html_392998e2e52b7570e613b964f202f31d" style="width: 100.0%; height: 100.0%;">             <b>Domestic Violence Services at SSM Health Waupun Memorial Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Domestic Violence<br>             <b>Address:</b> 620 W. Brown St., Waupun, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 5,229             </div>`)[0];
+                popup_22cb549f904a05e5b37b2df7ca4623c3.setContent(html_392998e2e52b7570e613b964f202f31d);
+            
+        
+
+        marker_e3d229ad3f09d192cc5f3bade9b2c8f8.bindPopup(popup_22cb549f904a05e5b37b2df7ca4623c3)
+        ;
+
+        
+    
+    
+            marker_e3d229ad3f09d192cc5f3bade9b2c8f8.bindTooltip(
+                `<div>
+                     Domestic Violence Services at SSM Health Waupun Memorial Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e3d229ad3f09d192cc5f3bade9b2c8f8.setIcon(icon_a010e1d79bf49b6859ebd04be9927cc9);
+            
+    
+            var marker_06b2233ab5dfd99cf76f0e36aab1e7ac = L.marker(
+                [38.7715504, -90.3049729],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_d591546568ae0886023d2b53a8b4e67a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d3c2b2ae3f7e353a15cc53bc2b1a9920 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3a883d25551aebb651612872176c4512 = $(`<div id="html_3a883d25551aebb651612872176c4512" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Cardinal Glennon Pediatrics Specialty Services - North County</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 3878 Pershall Road, St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 21,326             </div>`)[0];
+                popup_d3c2b2ae3f7e353a15cc53bc2b1a9920.setContent(html_3a883d25551aebb651612872176c4512);
+            
+        
+
+        marker_06b2233ab5dfd99cf76f0e36aab1e7ac.bindPopup(popup_d3c2b2ae3f7e353a15cc53bc2b1a9920)
+        ;
+
+        
+    
+    
+            marker_06b2233ab5dfd99cf76f0e36aab1e7ac.bindTooltip(
+                `<div>
+                     SSM Health Cardinal Glennon Pediatrics Specialty Services - North County - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_06b2233ab5dfd99cf76f0e36aab1e7ac.setIcon(icon_d591546568ae0886023d2b53a8b4e67a);
+            
+    
+            var marker_fd2fa2a60684efbf4dd34534d9456e3c = L.marker(
+                [38.6340467, -90.3102043],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_9fbcaf9385c9271cf0af8d1944561dfe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b778258b5818d14edc03481319d9c47e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_64a5b9bd4f21ab8d1ab41f6098ab3708 = $(`<div id="html_64a5b9bd4f21ab8d1ab41f6098ab3708" style="width: 100.0%; height: 100.0%;">             <b>Anticoagulation Therapy at SSM Health St. Mary's Hospital - St. Louis</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Anticoagulation<br>             <b>Address:</b> 6420 Clayton Road, St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 9,145             </div>`)[0];
+                popup_b778258b5818d14edc03481319d9c47e.setContent(html_64a5b9bd4f21ab8d1ab41f6098ab3708);
+            
+        
+
+        marker_fd2fa2a60684efbf4dd34534d9456e3c.bindPopup(popup_b778258b5818d14edc03481319d9c47e)
+        ;
+
+        
+    
+    
+            marker_fd2fa2a60684efbf4dd34534d9456e3c.bindTooltip(
+                `<div>
+                     Anticoagulation Therapy at SSM Health St. Mary's Hospital - St. Louis - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fd2fa2a60684efbf4dd34534d9456e3c.setIcon(icon_9fbcaf9385c9271cf0af8d1944561dfe);
+            
+    
+            var marker_e7f5bbdb8cd91f399bc18ef2cf8dc6b8 = L.marker(
+                [38.623991, -90.23754],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_8b6857045dd454246f915fa172e9b4c1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_184b5422123fa80e3932508374e8e1cb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_26684c82c30876d18aff4804389cbc48 = $(`<div id="html_26684c82c30876d18aff4804389cbc48" style="width: 100.0%; height: 100.0%;">             <b>Emergency Room at SSM Health Saint Louis University Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Emergency Room<br>             <b>Address:</b> 1201 S. Grand Blvd., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 18,195             </div>`)[0];
+                popup_184b5422123fa80e3932508374e8e1cb.setContent(html_26684c82c30876d18aff4804389cbc48);
+            
+        
+
+        marker_e7f5bbdb8cd91f399bc18ef2cf8dc6b8.bindPopup(popup_184b5422123fa80e3932508374e8e1cb)
+        ;
+
+        
+    
+    
+            marker_e7f5bbdb8cd91f399bc18ef2cf8dc6b8.bindTooltip(
+                `<div>
+                     Emergency Room at SSM Health Saint Louis University Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e7f5bbdb8cd91f399bc18ef2cf8dc6b8.setIcon(icon_8b6857045dd454246f915fa172e9b4c1);
+            
+    
+            var marker_196905a140bcd2ecdbc7af731d1bd955 = L.marker(
+                [43.4804109, -89.7313033],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_fb79a97b958af4fc440242b6c970302a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_633a60709847c9f00119f91e2e231ce5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b6a730386f34eaff0279685236d10b28 = $(`<div id="html_b6a730386f34eaff0279685236d10b28" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Heart & Vascular Care</b><br>             <b>Type:</b> Cardiology<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1626 Tuttle St., Baraboo, WI<br>             <b>MSA:</b> Madison, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 7             </div>`)[0];
+                popup_633a60709847c9f00119f91e2e231ce5.setContent(html_b6a730386f34eaff0279685236d10b28);
+            
+        
+
+        marker_196905a140bcd2ecdbc7af731d1bd955.bindPopup(popup_633a60709847c9f00119f91e2e231ce5)
+        ;
+
+        
+    
+    
+            marker_196905a140bcd2ecdbc7af731d1bd955.bindTooltip(
+                `<div>
+                     SSM Health Heart & Vascular Care - Cardiology
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_196905a140bcd2ecdbc7af731d1bd955.setIcon(icon_fb79a97b958af4fc440242b6c970302a);
+            
+    
+            var marker_c6a9bec23b435a8512f0345d90dd62db = L.marker(
+                [38.6142445, -90.3138193],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_d07b2b636e06983d705cb07153fcac1e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52f9e5cad7b5831ef1bc21ab20cfb179 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2382f09d0e01682c4852980b05108f41 = $(`<div id="html_2382f09d0e01682c4852980b05108f41" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Urgent Care</b><br>             <b>Type:</b> Urgent Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 8820 Manchester Road, St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 8,822             </div>`)[0];
+                popup_52f9e5cad7b5831ef1bc21ab20cfb179.setContent(html_2382f09d0e01682c4852980b05108f41);
+            
+        
+
+        marker_c6a9bec23b435a8512f0345d90dd62db.bindPopup(popup_52f9e5cad7b5831ef1bc21ab20cfb179)
+        ;
+
+        
+    
+    
+            marker_c6a9bec23b435a8512f0345d90dd62db.bindTooltip(
+                `<div>
+                     SSM Health Urgent Care - Urgent Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c6a9bec23b435a8512f0345d90dd62db.setIcon(icon_d07b2b636e06983d705cb07153fcac1e);
+            
+    
+            var marker_de5472fd11b248ac82217512b509395b = L.marker(
+                [38.6229713, -90.2390457],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_4484c9cdaf33ea2691c3f8b2f9d77e94 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8d0648f9352c02dd9240fcc6a2726449 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_05ad6597984601ab42ca5d34214cc125 = $(`<div id="html_05ad6597984601ab42ca5d34214cc125" style="width: 100.0%; height: 100.0%;">             <b>Long-Acting Injection Clinic at SSM Health Saint Louis University Hospital</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 3635 Vista Ave., St. Louis, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 16,684             </div>`)[0];
+                popup_8d0648f9352c02dd9240fcc6a2726449.setContent(html_05ad6597984601ab42ca5d34214cc125);
+            
+        
+
+        marker_de5472fd11b248ac82217512b509395b.bindPopup(popup_8d0648f9352c02dd9240fcc6a2726449)
+        ;
+
+        
+    
+    
+            marker_de5472fd11b248ac82217512b509395b.bindTooltip(
+                `<div>
+                     Long-Acting Injection Clinic at SSM Health Saint Louis University Hospital - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_de5472fd11b248ac82217512b509395b.setIcon(icon_4484c9cdaf33ea2691c3f8b2f9d77e94);
+            
+    
+            var marker_6b66076746656765c5af252448760707 = L.marker(
+                [35.3618173, -96.9389932],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_6f4273167103a4b1e944e6ee661ef601 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_98d767eb096c8c26d6ff922de255127c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6f7fdf30013b737385e51ee7aa711084 = $(`<div id="html_6f7fdf30013b737385e51ee7aa711084" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Cancer Care</b><br>             <b>Type:</b> Cancer Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 1102 W. MacArthur St., Shawnee, OK<br>             <b>MSA:</b> Shawnee, OK Micropolitan Statistical Area<br>             <b>MSA Population:</b> 20,436             </div>`)[0];
+                popup_98d767eb096c8c26d6ff922de255127c.setContent(html_6f7fdf30013b737385e51ee7aa711084);
+            
+        
+
+        marker_6b66076746656765c5af252448760707.bindPopup(popup_98d767eb096c8c26d6ff922de255127c)
+        ;
+
+        
+    
+    
+            marker_6b66076746656765c5af252448760707.bindTooltip(
+                `<div>
+                     SSM Health Cancer Care - Cancer Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6b66076746656765c5af252448760707.setIcon(icon_6f4273167103a4b1e944e6ee661ef601);
+            
+    
+            var marker_a197da96abe41c8dd14b437e2e8e1e65 = L.marker(
+                [35.3907027, -97.7069253],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_aa9d9e4d4b3417857f215e8ff2cffa8c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f6fa0828c3c21b3d42f7b397a7fc805a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d9dc8c3b4bf997850cb6b08c9d8ec742 = $(`<div id="html_d9dc8c3b4bf997850cb6b08c9d8ec742" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Imaging Services</b><br>             <b>Type:</b> Imaging Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 201 S. Sara Road, Mustang, OK<br>             <b>MSA:</b> Oklahoma City, OK Metropolitan Statistical Area<br>             <b>MSA Population:</b> 24,356             </div>`)[0];
+                popup_f6fa0828c3c21b3d42f7b397a7fc805a.setContent(html_d9dc8c3b4bf997850cb6b08c9d8ec742);
+            
+        
+
+        marker_a197da96abe41c8dd14b437e2e8e1e65.bindPopup(popup_f6fa0828c3c21b3d42f7b397a7fc805a)
+        ;
+
+        
+    
+    
+            marker_a197da96abe41c8dd14b437e2e8e1e65.bindTooltip(
+                `<div>
+                     SSM Health Imaging Services - Imaging Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a197da96abe41c8dd14b437e2e8e1e65.setIcon(icon_aa9d9e4d4b3417857f215e8ff2cffa8c);
+            
+    
+            var marker_9ffc0b741645d2f0c0ba40c4ac5aa36c = L.marker(
+                [43.7784695, -88.4319909],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_fe04127b8420fc360ea10915e139aff0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a59de1782493e33fff324a1c7c13e607 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4852e92cc09176de5a322521d9dd5239 = $(`<div id="html_4852e92cc09176de5a322521d9dd5239" style="width: 100.0%; height: 100.0%;">             <b>Infection Prevention & Treatment at SSM Health St. Agnes Hospital - Fond du Lac</b><br>             <b>Type:</b> Hospital<br>             <b>Specialty:</b> Infectious Disease<br>             <b>Address:</b> 430 E. Division St., Fond Du Lac, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 41,860             </div>`)[0];
+                popup_a59de1782493e33fff324a1c7c13e607.setContent(html_4852e92cc09176de5a322521d9dd5239);
+            
+        
+
+        marker_9ffc0b741645d2f0c0ba40c4ac5aa36c.bindPopup(popup_a59de1782493e33fff324a1c7c13e607)
+        ;
+
+        
+    
+    
+            marker_9ffc0b741645d2f0c0ba40c4ac5aa36c.bindTooltip(
+                `<div>
+                     Infection Prevention & Treatment at SSM Health St. Agnes Hospital - Fond du Lac - Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9ffc0b741645d2f0c0ba40c4ac5aa36c.setIcon(icon_fe04127b8420fc360ea10915e139aff0);
+            
+    
+            var marker_5c7c9626d65ce561a082ffe91004bf3d = L.marker(
+                [38.7681111, -90.4984509],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_0e5f95a54eddb4e37050d70cb33bb3fb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5f5baa88da0dcfffab5e3f1e8fcc791a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9953bb5748635fbb799ffac2914f4c53 = $(`<div id="html_9953bb5748635fbb799ffac2914f4c53" style="width: 100.0%; height: 100.0%;">             <b>Anticoagulation Therapy at SSM Health Outpatient Center</b><br>             <b>Type:</b> Therapy Services<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 711 Veterans Memorial Parkway, St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 49,703             </div>`)[0];
+                popup_5f5baa88da0dcfffab5e3f1e8fcc791a.setContent(html_9953bb5748635fbb799ffac2914f4c53);
+            
+        
+
+        marker_5c7c9626d65ce561a082ffe91004bf3d.bindPopup(popup_5f5baa88da0dcfffab5e3f1e8fcc791a)
+        ;
+
+        
+    
+    
+            marker_5c7c9626d65ce561a082ffe91004bf3d.bindTooltip(
+                `<div>
+                     Anticoagulation Therapy at SSM Health Outpatient Center - Therapy Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5c7c9626d65ce561a082ffe91004bf3d.setIcon(icon_0e5f95a54eddb4e37050d70cb33bb3fb);
+            
+    
+            var marker_17b2db788e461c6cca3c0362bdd5b303 = L.marker(
+                [38.5783522, -92.24553],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_1567c8887dc7afc2ff2079566c017e1c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_194f8e9ef8c549b316e806d092514510 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c3c5b360835ac733d8451d0b5a1ad369 = $(`<div id="html_c3c5b360835ac733d8451d0b5a1ad369" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group - Pediatrics</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> Cardiology<br>             <b>Address:</b> 3348 American Ave., Jefferson City, MO<br>             <b>MSA:</b> Jefferson City, MO Metropolitan Statistical Area<br>             <b>MSA Population:</b> 38,411             </div>`)[0];
+                popup_194f8e9ef8c549b316e806d092514510.setContent(html_c3c5b360835ac733d8451d0b5a1ad369);
+            
+        
+
+        marker_17b2db788e461c6cca3c0362bdd5b303.bindPopup(popup_194f8e9ef8c549b316e806d092514510)
+        ;
+
+        
+    
+    
+            marker_17b2db788e461c6cca3c0362bdd5b303.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Pediatrics - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_17b2db788e461c6cca3c0362bdd5b303.setIcon(icon_1567c8887dc7afc2ff2079566c017e1c);
+            
+    
+            var marker_89863d01b59562bed319b50b9b46523d = L.marker(
+                [43.6320819, -88.745819],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_855f55bebc7cda49e6294d5dc4fcc3c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_070a6993a0d12cd9e97b2dc3d4101e13 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_78d9e1b27be7caa1b0dfdb6633ba109c = $(`<div id="html_78d9e1b27be7caa1b0dfdb6633ba109c" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Cancer Care</b><br>             <b>Type:</b> Cancer Care<br>             <b>Specialty:</b> nan<br>             <b>Address:</b> 620 W. Brown St., Waupun, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 5,229             </div>`)[0];
+                popup_070a6993a0d12cd9e97b2dc3d4101e13.setContent(html_78d9e1b27be7caa1b0dfdb6633ba109c);
+            
+        
+
+        marker_89863d01b59562bed319b50b9b46523d.bindPopup(popup_070a6993a0d12cd9e97b2dc3d4101e13)
+        ;
+
+        
+    
+    
+            marker_89863d01b59562bed319b50b9b46523d.bindTooltip(
+                `<div>
+                     SSM Health Cancer Care - Cancer Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_89863d01b59562bed319b50b9b46523d.setIcon(icon_855f55bebc7cda49e6294d5dc4fcc3c4);
+            
+    
+            var marker_59042881d2f11792da07d9f3afa9015a = L.marker(
+                [35.3635828, -96.9388004],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_8c97b61497e75b39c383f74ad664405a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e08130b758311f943ebd287a3db0aae1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7245215e1ebd5702d1d79d5798fcf490 = $(`<div id="html_7245215e1ebd5702d1d79d5798fcf490" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 3210 Kethley Road, Shawnee, OK<br>             <b>MSA:</b> Shawnee, OK Micropolitan Statistical Area<br>             <b>MSA Population:</b> 20,436             </div>`)[0];
+                popup_e08130b758311f943ebd287a3db0aae1.setContent(html_7245215e1ebd5702d1d79d5798fcf490);
+            
+        
+
+        marker_59042881d2f11792da07d9f3afa9015a.bindPopup(popup_e08130b758311f943ebd287a3db0aae1)
+        ;
+
+        
+    
+    
+            marker_59042881d2f11792da07d9f3afa9015a.bindTooltip(
+                `<div>
+                     SSM Health Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_59042881d2f11792da07d9f3afa9015a.setIcon(icon_8c97b61497e75b39c383f74ad664405a);
+            
+    
+            var marker_78be3d6b3fe1c2ef723795b412401257 = L.marker(
+                [38.7809305, -90.4848619],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_7bd89c36aeeb5ed0df7ef0fce4003a6b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2d7de7ddfd60f040742ad7f44424d3d9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ab9e8d824b0850d2da99070e6051589c = $(`<div id="html_ab9e8d824b0850d2da99070e6051589c" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Physical Therapy</b><br>             <b>Type:</b> Therapy Services<br>             <b>Specialty:</b> Occupational Therapy<br>             <b>Address:</b> 300 First Capitol Drive, St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 52,610             </div>`)[0];
+                popup_2d7de7ddfd60f040742ad7f44424d3d9.setContent(html_ab9e8d824b0850d2da99070e6051589c);
+            
+        
+
+        marker_78be3d6b3fe1c2ef723795b412401257.bindPopup(popup_2d7de7ddfd60f040742ad7f44424d3d9)
+        ;
+
+        
+    
+    
+            marker_78be3d6b3fe1c2ef723795b412401257.bindTooltip(
+                `<div>
+                     SSM Health Physical Therapy - Therapy Services
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_78be3d6b3fe1c2ef723795b412401257.setIcon(icon_7bd89c36aeeb5ed0df7ef0fce4003a6b);
+            
+    
+            var marker_20e58cc6f8172ac181a46cdcc8cf6d24 = L.marker(
+                [35.3331051, -97.5908626],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_5375a79eb525260a4c0193fc7d33441c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1fb43a83ff379bb3c03ffd1c599e0a7b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_75d7ce615c7de67b444d029e149fa04f = $(`<div id="html_75d7ce615c7de67b444d029e149fa04f" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Specialty Care<br>             <b>Specialty:</b> Cardiology<br>             <b>Address:</b> 13500 S. Tulsa Drive, Oklahoma City, OK<br>             <b>MSA:</b> Oklahoma City, OK Metropolitan Statistical Area<br>             <b>MSA Population:</b> 38,508             </div>`)[0];
+                popup_1fb43a83ff379bb3c03ffd1c599e0a7b.setContent(html_75d7ce615c7de67b444d029e149fa04f);
+            
+        
+
+        marker_20e58cc6f8172ac181a46cdcc8cf6d24.bindPopup(popup_1fb43a83ff379bb3c03ffd1c599e0a7b)
+        ;
+
+        
+    
+    
+            marker_20e58cc6f8172ac181a46cdcc8cf6d24.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Specialty Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_20e58cc6f8172ac181a46cdcc8cf6d24.setIcon(icon_5375a79eb525260a4c0193fc7d33441c);
+            
+    
+            var marker_86e4c6adf1338fe7f38cdabac44166f0 = L.marker(
+                [38.7809305, -90.4848619],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_58d6b8fd1d07210f069120fca6f0ab6d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b4da1b9131eeb13bf4593914d671bf3c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f5439054366d1eeb3fdbeead97a3a751 = $(`<div id="html_f5439054366d1eeb3fdbeead97a3a751" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Pharmacy</b><br>             <b>Type:</b> Pharmacy<br>             <b>Specialty:</b> Pharmacy<br>             <b>Address:</b> 300 First Capitol Drive, St. Charles, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 52,610             </div>`)[0];
+                popup_b4da1b9131eeb13bf4593914d671bf3c.setContent(html_f5439054366d1eeb3fdbeead97a3a751);
+            
+        
+
+        marker_86e4c6adf1338fe7f38cdabac44166f0.bindPopup(popup_b4da1b9131eeb13bf4593914d671bf3c)
+        ;
+
+        
+    
+    
+            marker_86e4c6adf1338fe7f38cdabac44166f0.bindTooltip(
+                `<div>
+                     SSM Health Pharmacy - Pharmacy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86e4c6adf1338fe7f38cdabac44166f0.setIcon(icon_58d6b8fd1d07210f069120fca6f0ab6d);
+            
+    
+            var marker_695737f0a87e1be91adf580d07bd9ec5 = L.marker(
+                [38.7888641, -90.6236243],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_09563c94085d7139dfe8857fdf849312 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightgreen",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5f74f3f9710f6c2b0751de2c0b1d8a0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5c41a83e77ed9b39131686cdd2e2df8f = $(`<div id="html_5c41a83e77ed9b39131686cdd2e2df8f" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> Primary Care<br>             <b>Specialty:</b> Family Medicine<br>             <b>Address:</b> 6994 Mexico Road, St. Peters, MO<br>             <b>MSA:</b> St. Louis, MO-IL Metropolitan Statistical Area<br>             <b>MSA Population:</b> 76,807             </div>`)[0];
+                popup_e5f74f3f9710f6c2b0751de2c0b1d8a0.setContent(html_5c41a83e77ed9b39131686cdd2e2df8f);
+            
+        
+
+        marker_695737f0a87e1be91adf580d07bd9ec5.bindPopup(popup_e5f74f3f9710f6c2b0751de2c0b1d8a0)
+        ;
+
+        
+    
+    
+            marker_695737f0a87e1be91adf580d07bd9ec5.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - Primary Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_695737f0a87e1be91adf580d07bd9ec5.setIcon(icon_09563c94085d7139dfe8857fdf849312);
+            
+    
+            var marker_4e807952b3248eb7c086ef2a35384f7b = L.marker(
+                [35.3784955, -96.9119689],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_52c0d10004f88d7c64f445da9117cd9e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightcoral",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5365cf9cfb7fb465aed76683fa19dd17 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8f82f56a4432a5820c48ce16ed5dbc4b = $(`<div id="html_8f82f56a4432a5820c48ce16ed5dbc4b" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Medical Group</b><br>             <b>Type:</b> OB/GYN<br>             <b>Specialty:</b> Obstetrics and Gynecology<br>             <b>Address:</b> 4651 N. Harrison St., Shawnee, OK<br>             <b>MSA:</b> Shawnee, OK Micropolitan Statistical Area<br>             <b>MSA Population:</b> 20,436             </div>`)[0];
+                popup_5365cf9cfb7fb465aed76683fa19dd17.setContent(html_8f82f56a4432a5820c48ce16ed5dbc4b);
+            
+        
+
+        marker_4e807952b3248eb7c086ef2a35384f7b.bindPopup(popup_5365cf9cfb7fb465aed76683fa19dd17)
+        ;
+
+        
+    
+    
+            marker_4e807952b3248eb7c086ef2a35384f7b.bindTooltip(
+                `<div>
+                     SSM Health Medical Group - OB/GYN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4e807952b3248eb7c086ef2a35384f7b.setIcon(icon_52c0d10004f88d7c64f445da9117cd9e);
+            
+    
+            var marker_8cf5d216cbf572e4067b31466038bc78 = L.marker(
+                [43.8092645, -88.4993727],
+                {
+}
+            ).addTo(map_0077481a57f1dbf68bb6defede9ce489);
+        
+    
+            var icon_ab409be01b70676667b790c7d00492ee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightgreen",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7ad96bbd1ff981efc2bf15d5a0169308 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_99a9f7efbdede93feee498aa670d3630 = $(`<div id="html_99a9f7efbdede93feee498aa670d3630" style="width: 100.0%; height: 100.0%;">             <b>SSM Health Fond du Lac Regional Clinic</b><br>             <b>Type:</b> Primary Care<br>             <b>Specialty:</b> Family Medicine<br>             <b>Address:</b> 723 Park Ridge Lane, North Fond Du Lac, WI<br>             <b>MSA:</b> Fond du Lac, WI Metropolitan Statistical Area<br>             <b>MSA Population:</b> 19,208             </div>`)[0];
+                popup_7ad96bbd1ff981efc2bf15d5a0169308.setContent(html_99a9f7efbdede93feee498aa670d3630);
+            
+        
+
+        marker_8cf5d216cbf572e4067b31466038bc78.bindPopup(popup_7ad96bbd1ff981efc2bf15d5a0169308)
+        ;
+
+        
+    
+    
+            marker_8cf5d216cbf572e4067b31466038bc78.bindTooltip(
+                `<div>
+                     SSM Health Fond du Lac Regional Clinic - Primary Care
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8cf5d216cbf572e4067b31466038bc78.setIcon(icon_ab409be01b70676667b790c7d00492ee);
+            
+</script>
+</html>

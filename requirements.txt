@@ -1,0 +1,10 @@
+Flask==2.3.3
+gunicorn==21.2.0
+pandas>=2.2.1
+folium==0.15.1
+numpy>=1.26.2
+requests==2.31.0
+Jinja2==3.1.2
+plotly>=5.17.0
+geopy>=2.4.0
+# Updated requirements for SSM Health visualization 

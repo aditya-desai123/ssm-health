@@ -1,0 +1,2 @@
+*.html filter=lfs diff=lfs merge=lfs -text
+ssm_health_comprehensive_final_map.html filter=lfs diff=lfs merge=lfs -text

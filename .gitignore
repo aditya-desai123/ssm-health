@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Data files (optional - remove if you want to include data)
+#*.csv
+*.json
+*.xlsx
+
+# Temporary files
+temp/
+tmp/
+
+# Ignore all files in geojson directory except the two required GeoJSONs
+geojson/*
+!zipcodes_mn_wi_il_scored.geojson
+!zipcodes_mo_ok.geojson
+
+# Ignore other large GeoJSONs in root except the two required
+zipcodes_*.geojson
+!zipcodes_mn_wi_il_scored.geojson
+!zipcodes_mo_ok.geojson
