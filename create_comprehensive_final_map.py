@@ -10,6 +10,7 @@ import json
 import numpy as np
 from folium import plugins
 from folium.plugins import Geocoder
+import re
 
 def load_and_merge_zip_data():
     """Load and merge all ZIP demographics data, excluding MN"""
@@ -271,6 +272,9 @@ def create_comprehensive_map(zip_data, facilities):
         # Create a feature group for facilities
         facility_group = folium.FeatureGroup(name="SSM Health Facilities", show=True)
         
+        # Create a separate feature group for hospitals to make them stand out
+        hospital_group = folium.FeatureGroup(name="🏥 SSM Health Hospitals", show=True)
+        
         # Facility type colors
         facility_colors = {
             'Hospital': '#d62728',      # Red
@@ -303,6 +307,42 @@ def create_comprehensive_map(zip_data, facilities):
             }
             mapped_color = color_map.get(hex_color, 'red')
             return mapped_color
+        
+        # --- Hospital statistics from image ---
+        hospital_stats = {
+            "SSM Health St. Mary's Hospital - Jefferson City": {"Region": "MID-MISSOURI", "Avg Cases/Month": "7,522", "Net Rev/Case": "$1,425", "Direct Cost/Case": "$974", "Direct Labor/Case": "$535", "Direct Supplies/Case": "$242", "Direct Purch Svc/Case": "$60", "Direct Physician Cost/Case": "$73", "Direct Other Cost/Case": "$65", "MBO/Case": "$451"},
+            "SSM Health St. Anthony Hospital - Shawnee, Seminole Campus": {"Region": "OKLAHOMA", "Avg Cases/Month": "5,175", "Net Rev/Case": "$2,567", "Direct Cost/Case": "$1,506", "Direct Labor/Case": "$885", "Direct Supplies/Case": "$420", "Direct Purch Svc/Case": "$119", "Direct Physician Cost/Case": "$44", "Direct Other Cost/Case": "$37", "MBO/Case": "$1,061"},
+            "SSM Health St. Anthony Hospital - Oklahoma City": {"Region": "OKLAHOMA", "Avg Cases/Month": "36,224", "Net Rev/Case": "$1,735", "Direct Cost/Case": "$1,068", "Direct Labor/Case": "$523", "Direct Supplies/Case": "$411", "Direct Purch Svc/Case": "$32", "Direct Physician Cost/Case": "$46", "Direct Other Cost/Case": "$57", "MBO/Case": "$667"},
+            "SSM Health St. Anthony Hospital - Shawnee": {"Region": "OKLAHOMA", "Avg Cases/Month": "10,761", "Net Rev/Case": "$1,096", "Direct Cost/Case": "$637", "Direct Labor/Case": "$282", "Direct Supplies/Case": "$201", "Direct Purch Svc/Case": "$30", "Direct Physician Cost/Case": "$19", "Direct Other Cost/Case": "$105", "MBO/Case": "$460"},
+            "good samaritan mt vernon": {"Region": "SO. ILLINOIS", "Avg Cases/Month": "7,460", "Net Rev/Case": "$2,563", "Direct Cost/Case": "$1,312", "Direct Labor/Case": "$726", "Direct Supplies/Case": "$373", "Direct Purch Svc/Case": "$118", "Direct Physician Cost/Case": "$62", "Direct Other Cost/Case": "$51", "MBO/Case": "$1,251"},
+            "st mary's centralia": {"Region": "SO. ILLINOIS", "Avg Cases/Month": "6,352", "Net Rev/Case": "$1,511", "Direct Cost/Case": "$656", "Direct Labor/Case": "$422", "Direct Supplies/Case": "$106", "Direct Purch Svc/Case": "$72", "Direct Physician Cost/Case": "$37", "Direct Other Cost/Case": "$37", "MBO/Case": "$855"},
+            "cardinal glennon children's hospital": {"Region": "ST. LOUIS", "Avg Cases/Month": "16,632", "Net Rev/Case": "$1,669", "Direct Cost/Case": "$1,054", "Direct Labor/Case": "$492", "Direct Supplies/Case": "$492", "Direct Purch Svc/Case": "$198", "Direct Physician Cost/Case": "$32", "Direct Other Cost/Case": "$109", "MBO/Case": "$518"},
+            "depaul hospital": {"Region": "ST. LOUIS", "Avg Cases/Month": "15,786", "Net Rev/Case": "$2,462", "Direct Cost/Case": "$1,882", "Direct Labor/Case": "$823", "Direct Supplies/Case": "$631", "Direct Purch Svc/Case": "$72", "Direct Physician Cost/Case": "$137", "Direct Other Cost/Case": "$219", "MBO/Case": "$580"},
+            "saint louis university hospital": {"Region": "ST. LOUIS", "Avg Cases/Month": "15,556", "Net Rev/Case": "$4,181", "Direct Cost/Case": "$3,366", "Direct Labor/Case": "$1,250", "Direct Supplies/Case": "$1,002", "Direct Purch Svc/Case": "$153", "Direct Physician Cost/Case": "$993", "Direct Other Cost/Case": "$362", "MBO/Case": "$1,621"},
+            "st clare hospital - fenton": {"Region": "ST. LOUIS", "Avg Cases/Month": "10,981", "Net Rev/Case": "$1,605", "Direct Cost/Case": "$1,138", "Direct Labor/Case": "$541", "Direct Supplies/Case": "$319", "Direct Purch Svc/Case": "$89", "Direct Physician Cost/Case": "$141", "Direct Other Cost/Case": "$147", "MBO/Case": "$467"},
+            "SSM Health St. Joseph Hospital - Lake Saint Louis": {"Region": "ST. LOUIS", "Avg Cases/Month": "10,742", "Net Rev/Case": "$1,491", "Direct Cost/Case": "$1,081", "Direct Labor/Case": "$495", "Direct Supplies/Case": "$311", "Direct Purch Svc/Case": "$39", "Direct Physician Cost/Case": "$104", "Direct Other Cost/Case": "$191", "MBO/Case": "$541"},
+            "st joseph hospital - st charles": {"Region": "ST. LOUIS", "Avg Cases/Month": "14,085", "Net Rev/Case": "$1,351", "Direct Cost/Case": "$983", "Direct Labor/Case": "$478", "Direct Supplies/Case": "$247", "Direct Purch Svc/Case": "$35", "Direct Physician Cost/Case": "$81", "Direct Other Cost/Case": "$141", "MBO/Case": "$368"},
+            "st mary's hospital - st. louis": {"Region": "ST. LOUIS", "Avg Cases/Month": "15,383", "Net Rev/Case": "$2,035", "Direct Cost/Case": "$1,553", "Direct Labor/Case": "$657", "Direct Supplies/Case": "$444", "Direct Purch Svc/Case": "$54", "Direct Physician Cost/Case": "$225", "Direct Other Cost/Case": "$174", "MBO/Case": "$842"},
+            "monroe hospital": {"Region": "WISCONSIN", "Avg Cases/Month": "4,600", "Net Rev/Case": "$1,962", "Direct Cost/Case": "$957", "Direct Labor/Case": "$588", "Direct Supplies/Case": "$213", "Direct Purch Svc/Case": "$0", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$118", "MBO/Case": "$1,005"},
+            "ripon medical center": {"Region": "WISCONSIN", "Avg Cases/Month": "2,126", "Net Rev/Case": "$1,347", "Direct Cost/Case": "$658", "Direct Labor/Case": "$378", "Direct Supplies/Case": "$164", "Direct Purch Svc/Case": "$0", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$111", "MBO/Case": "$689"},
+            "st agnes hospital": {"Region": "WISCONSIN", "Avg Cases/Month": "13,093", "Net Rev/Case": "$1,792", "Direct Cost/Case": "$994", "Direct Labor/Case": "$506", "Direct Supplies/Case": "$506", "Direct Purch Svc/Case": "$0", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$79", "MBO/Case": "$707"},
+            "st clare hospital - baraboo": {"Region": "WISCONSIN", "Avg Cases/Month": "7,659", "Net Rev/Case": "$853", "Direct Cost/Case": "$377", "Direct Labor/Case": "$240", "Direct Supplies/Case": "$240", "Direct Purch Svc/Case": "$0", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$45", "MBO/Case": "$476"},
+            "st mary's hospital - janesville": {"Region": "WISCONSIN", "Avg Cases/Month": "7,566", "Net Rev/Case": "$1,006", "Direct Cost/Case": "$494", "Direct Labor/Case": "$237", "Direct Supplies/Case": "$237", "Direct Purch Svc/Case": "$0", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$73", "MBO/Case": "$544"},
+            "st mary's hospital - madison": {"Region": "WISCONSIN", "Avg Cases/Month": "19,286", "Net Rev/Case": "$2,158", "Direct Cost/Case": "$1,347", "Direct Labor/Case": "$632", "Direct Supplies/Case": "$632", "Direct Purch Svc/Case": "$0", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$459", "MBO/Case": "$843"},
+            "waupun memorial": {"Region": "WISCONSIN", "Avg Cases/Month": "3,909", "Net Rev/Case": "$1,349", "Direct Cost/Case": "$688", "Direct Labor/Case": "$380", "Direct Supplies/Case": "$184", "Direct Purch Svc/Case": "$71", "Direct Physician Cost/Case": "$0", "Direct Other Cost/Case": "$56", "MBO/Case": "$561"}
+        }
+
+        def normalize_name(name):
+            # Lowercase, remove punctuation, extra spaces, and common stopwords
+            name = name.lower()
+            name = re.sub(r"[^a-z0-9 ]+", " ", name)
+            stopwords = [
+                "ssm", "health", "hospital", "center", "medical", "community", "memorial", "children", "children s", "saint", "st", "the", "of", "-", "'s", "'"
+            ]
+            for word in stopwords:
+                name = name.replace(word, " ")
+            name = re.sub(r"\s+", " ", name).strip()
+            return name
         
         for idx, facility in facilities.iterrows():
             try:
@@ -377,22 +417,94 @@ def create_comprehensive_map(zip_data, facilities):
                     if 'cmi (12/2023)' in facility.index and pd.notna(facility['cmi (12/2023)']):
                         popup_content += f"<br>CMI (12/2023): {facility['cmi (12/2023)']:.2f}"
                     
-                    # Create facility marker
-                    marker = folium.Marker(
-                        location=[lat, lng],
-                        popup=folium.Popup(popup_content, max_width=300),
-                        icon=folium.Icon(color=folium_color, icon=icon_name),
-                        tooltip=f"{facility.get('name', 'Unknown')} ({facility_type})"
-                    )
-                    
-                    # Add marker to facility group
-                    marker.add_to(facility_group)
+                    # Special handling for hospitals - make them stand out
+                    if facility_type == 'Hospital':
+                        # Try to match hospital name to stats (fuzzy set-based)
+                        norm_name = normalize_name(facility.get('name', ''))
+                        print(f"DEBUG: Hospital name: {facility.get('name', '')} | Normalized: {norm_name}")
+                        matched_stats = None
+                        norm_name_set = set(norm_name.split())
+                        for key in hospital_stats:
+                            key_norm = normalize_name(key)
+                            key_set = set(key_norm.split())
+                            # Fuzzy match: if at least 2 words overlap, or one is subset of the other
+                            if len(norm_name_set & key_set) >= 2 or key_norm in norm_name or norm_name in key_norm:
+                                matched_stats = hospital_stats[key]
+                                print(f"DEBUG: Matched stats for {facility.get('name', '')} -> {key}")
+                                break
+                        if not matched_stats:
+                            print(f"DEBUG: No stats found for {facility.get('name', '')} (normalized: {norm_name})")
+                        # Create a custom HTML marker for hospitals with pulsing effect
+                        hospital_icon_html = f'''
+                        <div style="
+                            background-color: {hex_color};
+                            border: 3px solid white;
+                            border-radius: 50%;
+                            width: 25px;
+                            height: 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                            animation: pulse 2s infinite;
+                        ">
+                            <i class="fa fa-plus" style="color: white; font-size: 12px;"></i>
+                        </div>
+                        <style>
+                        @keyframes pulse {{
+                            0% {{
+                                transform: scale(1);
+                                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                            }}
+                            50% {{
+                                transform: scale(1.2);
+                                box-shadow: 0 0 20px rgba(214, 39, 40, 0.8);
+                            }}
+                            100% {{
+                                transform: scale(1);
+                                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                            }}
+                        }}
+                        </style>
+                        '''
+                        # Add hospital stats to popup if available
+                        if matched_stats:
+                            popup_content += "<br><b>Hospital Statistics:</b>"
+                            for stat_label, stat_value in matched_stats.items():
+                                popup_content += f"<br>{stat_label}: {stat_value}"
+                        
+                        # Create hospital marker with custom icon
+                        marker = folium.Marker(
+                            location=[lat, lng],
+                            popup=folium.Popup(popup_content, max_width=350),
+                            icon=folium.DivIcon(
+                                html=hospital_icon_html,
+                                icon_size=(25, 25),
+                                icon_anchor=(12, 12)
+                            ),
+                            tooltip=f"🏥 {facility.get('name', 'Unknown')} (Hospital)"
+                        )
+                        
+                        # Add to hospital group
+                        marker.add_to(hospital_group)
+                    else:
+                        # Regular facility marker
+                        marker = folium.Marker(
+                            location=[lat, lng],
+                            popup=folium.Popup(popup_content, max_width=300),
+                            icon=folium.Icon(color=folium_color, icon=icon_name),
+                            tooltip=f"{facility.get('name', 'Unknown')} ({facility_type})"
+                        )
+                        
+                        # Add to regular facility group
+                        marker.add_to(facility_group)
             except Exception as e:
                 print(f"    ⚠️ Error adding facility {facility.get('name', 'Unknown')}: {e}")
                 continue
         
-        # Add facility group to map
+        # Add both groups to map
         facility_group.add_to(m)
+        hospital_group.add_to(m)
     
     # Add custom search functionality for markers
     print("  Adding search functionality...")
@@ -548,7 +660,7 @@ def create_comprehensive_map(zip_data, facilities):
     
     legend_html = '''
     <div style="position: fixed; 
-                bottom: 50px; left: 50px; width: 350px; height: 400px; 
+                bottom: 50px; left: 50px; width: 350px; height: 450px; 
                 background-color: white; border:2px solid grey; z-index:9999; 
                 font-size:14px; padding: 10px; overflow-y: auto;">
     <p><b>Healthcare Attractiveness Score</b></p>
@@ -557,8 +669,27 @@ def create_comprehensive_map(zip_data, facilities):
     <p><i class="fa fa-square" style="color:#ffff66"></i> Medium (40-59)</p>
     <p><i class="fa fa-square" style="color:#ff9933"></i> Low (20-39)</p>
     <p><i class="fa fa-square" style="color:#ff3333"></i> Very Unattractive (0-19)</p>
-    <p><b>SSM Health Facilities</b></p>
-    <p><i class="glyphicon glyphicon-plus" style="color:#d62728"></i> Hospital</p>
+    <hr style="margin: 10px 0;">
+    <p><b>🏥 SSM Health Hospitals (Highlighted)</b></p>
+    <div style="display: flex; align-items: center; margin: 5px 0;">
+        <div style="
+            background-color: #d62728;
+            border: 3px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            margin-right: 10px;
+        ">
+            <i class="fa fa-plus" style="color: white; font-size: 10px;"></i>
+        </div>
+        <span><b>Hospital</b> (Pulsing Effect)</span>
+    </div>
+    <hr style="margin: 10px 0;">
+    <p><b>Other SSM Health Facilities</b></p>
     <p><i class="glyphicon glyphicon-exclamation-sign" style="color:#ff7f0e"></i> Emergency Department</p>
     <p><i class="glyphicon glyphicon-exclamation-sign" style="color:#ff9933"></i> Urgent Care</p>
     <p><i class="glyphicon glyphicon-info-sign" style="color:#2ca02c"></i> Clinic</p>
@@ -568,6 +699,10 @@ def create_comprehensive_map(zip_data, facilities):
     <p><i class="glyphicon glyphicon-leaf" style="color:#e377c2"></i> Pharmacy</p>
     <p><i class="glyphicon glyphicon-cloud" style="color:#17becf"></i> Laboratory / Lab</p>
     <p><i class="glyphicon glyphicon-home" style="color:#7f7f7f"></i> Other</p>
+    <hr style="margin: 10px 0;">
+    <p style="font-size: 12px; color: #666; font-style: italic;">
+        💡 Hospitals are displayed with pulsing red circles to make them stand out prominently
+    </p>
     </div>
     '''
     
