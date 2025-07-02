@@ -132,6 +132,7 @@ def main():
 
     # Add ZIP polygons colored by dominant system
     colored_zips = 0
+    ssm_dominant_zips = 0
     for feature in all_features:
         zip_code = feature['properties'].get('ZCTA5CE10') or feature['properties'].get('ZCTA5CE20')
         if not zip_code or zip_code not in zip_dominant:
@@ -141,6 +142,11 @@ def main():
         color = system_colors.get(dominant_system, '#cccccc')
         hhi = zip_hhi[zip_code]
         hhi_interpretation = get_hhi_interpretation(hhi)
+        
+        # Check if SSM is the dominant system
+        is_ssm_dominant = 'SSM' in dominant_system.upper()
+        if is_ssm_dominant:
+            ssm_dominant_zips += 1
         
         # Popup: show all market shares for this ZIP with HHI
         popup_html = f'''
@@ -153,13 +159,21 @@ def main():
             popup_html += f'<li>{sys}: {share:.1%}</li>'
         popup_html += '</ul>'
         
-        def style_fn(f, color=color):
-            return {
+        def style_fn(f, color=color, is_ssm=is_ssm_dominant):
+            style = {
                 'fillColor': color,
                 'color': 'black',
                 'weight': 0.5,
                 'fillOpacity': 0.7
             }
+            # Add special outline for SSM-dominant ZIPs
+            if is_ssm:
+                style.update({
+                    'color': '#FF6B35',  # Orange-red outline
+                    'weight': 3,         # Thicker outline
+                    'opacity': 1.0       # Full opacity for outline
+                })
+            return style
         
         folium.GeoJson(
             feature,
@@ -171,6 +185,7 @@ def main():
         colored_zips += 1
 
     print(f"🎨 Colored {colored_zips} ZIP codes on the map")
+    print(f"🏥 SSM Health is market leader in {ssm_dominant_zips} ZIP codes")
 
     # Add legend
     legend_html = '''
@@ -180,6 +195,10 @@ def main():
     <b>Hospital System Market Share</b><br>
     <small>Click ZIP codes to see detailed breakdown</small><br>
     <small>HHI: Market concentration index (0-10,000)</small><br>
+    <div style="margin: 8px 0; padding: 5px; background: #fff3cd; border-left: 3px solid #FF6B35;">
+        <b>🏥 SSM Health Markets:</b><br>
+        <small>Orange-red outlines indicate ZIP codes where SSM Health is the market leader</small>
+    </div>
     '''
     for sys, color in system_colors.items():
         legend_html += f'<div style="display: flex; align-items: center; margin: 2px 0;"><div style="background:{color};width:16px;height:16px;margin-right:8px;border-radius:2px;"></div><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{sys}</span></div>'
@@ -193,7 +212,8 @@ def main():
                 padding: 10px;">
     <b>SSM Health - Comprehensive Competitor Market Share Map</b><br>
     <small>STL/SoIL, Wisconsin, and Oklahoma - 2024 Data</small><br>
-    <small>Includes HHI (Herfindahl-Hirschman Index) for market concentration</small>
+    <small>Includes HHI (Herfindahl-Hirschman Index) for market concentration</small><br>
+    <small>🏥 Orange-red outlines highlight SSM Health market-leading ZIP codes</small>
     </div>
     '''
     m.get_root().html.add_child(folium.Element(title_html))
