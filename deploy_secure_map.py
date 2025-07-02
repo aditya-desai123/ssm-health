@@ -58,6 +58,11 @@ def dashboard():
 def map_view():
     return send_from_directory('.', 'ssm_health_comprehensive_final_map.html')
 
+@app.route('/market-share-map')
+@login_required
+def market_share_map():
+    return send_from_directory('.', 'ssm_health_comprehensive_competitor_market_share_map.html')
+
 @app.route('/health')
 def health():
     return {'status': 'healthy'}, 200
@@ -73,6 +78,15 @@ if __name__ == '__main__':
         print("✅ Comprehensive map generated successfully!")
     except Exception as e:
         print(f"⚠️ Warning: Could not generate comprehensive map: {e}")
+    
+    # Generate the comprehensive competitor market share map
+    try:
+        print("📊 Generating comprehensive competitor market share map...")
+        from create_comprehensive_competitor_market_share_map import main as generate_market_share_map
+        generate_market_share_map()
+        print("✅ Market share map generated successfully!")
+    except Exception as e:
+        print(f"⚠️ Warning: Could not generate market share map: {e}")
     
     print(f"🌐 Server will be available at: http://localhost:{PORT}")
     print(f"👤 Username: {USERNAME}")
