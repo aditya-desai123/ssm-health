@@ -63,6 +63,11 @@ def map_view():
 def market_share_map():
     return send_from_directory('.', 'ssm_health_comprehensive_competitor_market_share_map.html')
 
+@app.route('/overlay-map')
+@login_required
+def overlay_map():
+    return send_from_directory('.', 'ssm_health_proper_overlay_market_share_attractiveness_facilities_map.html')
+
 @app.route('/health')
 def health():
     return {'status': 'healthy'}, 200
